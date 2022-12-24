@@ -1,0 +1,33 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+// font
+body,
+button,
+input,
+textarea {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  color: #222;
+  line-height: 1.5;
+  box-sizing: border-box;
+  font-feature-settings: 'tnum';
+}
+
+input[type='number'] {
+  font-feature-settings: 'tnum';
+}
+
+// heading
+h2 {
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #222;
+}
+
+h3 {
+  font-size: 14px;
+  font-weight: bold;
+  color: #222;
+}
