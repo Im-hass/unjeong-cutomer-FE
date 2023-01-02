@@ -1,0 +1,102 @@
+.wrap {
+  form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    padding-top: 20px;
+
+    .left {
+      width: 25%;
+      font-size: 16px;
+      font-weight: 500;
+      color: #646464;
+    }
+
+    .right {
+      width: 75%;
+    }
+
+    .input {
+      height: 28px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+
+      &::placeholder {
+        font-size: 13px;
+        color: rgba(#8B8585, 0.7);
+      }
+    }
+
+    .input-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .name-wrap {
+      input {
+        padding-left: 8px;
+      }
+    }
+
+    .phone-wrap {
+      input {
+        padding-left: 8px;
+      }
+    }
+
+    .kind-wrap {
+      .btn-wrap {
+        display: flex;
+        justify-content: space-between;
+
+        button {
+          width: 48%;
+          height: 28px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          background-color: #fff;
+          font-size: 14px;
+          color: #888;
+
+          &.active {
+            border: none;
+            background-color: #CF8BFC;
+            font-weight: 500;
+            color: #fff;
+          }
+        }
+      }
+    }
+
+    .number-wrap {
+      position: relative;
+
+      select {
+        -webkit-appearance: none;
+        font-size: 14px;
+        color: #646464;
+        text-align: center;
+
+        option {}
+      }
+
+      .icon {
+        position: absolute;
+        right: 10px;
+        pointer-events: none;
+      }
+    }
+
+    .submit-btn {
+      margin-top: 5px;
+      padding: 14px 0;
+      width: 100%;
+      border-radius: 5px;
+      background-color: #FDDC3F;
+      font-size: 18px;
+      font-weight: bold;
+      color: #666;
+    }
+  }
+}

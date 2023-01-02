@@ -1,22 +1,28 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Button from './components/common/Button';
 
+import './app.scss';
 import Header from './components/common/Header';
 import Menu from './components/common/Menu';
 import Nav from './components/common/Nav';
 import Main from './pages/Main';
+// import ReservationDate from './pages/ReservationDate';
+import ReservationForm from './pages/ReservationForm';
 
 function App() {
   return (
-    <div>
-      <Header />
-      <Nav />
-      <Routes>
-        <Route path='/' element={<Main />} />
-        {/* <Route path='reservation' element={<Reservation />} /> */}
-        {/* <Route path='reservationConfirm' element={<ReservationConfirm />} /> */}
-      </Routes>
+    <div className='wrap'>
+      <div className='top'>
+        <Header />
+        <Nav />
+      </div>
+      <div className='container-wrap'>
+        <Routes>
+          <Route path='/' element={<Main />} />
+          <Route path='reservation' element={<ReservationForm />} />
+          {/* <Route path='reservationConfirm' element={<ReservationConfirm />} /> */}
+        </Routes>
+      </div>
       <Menu />
     </div>
   );
