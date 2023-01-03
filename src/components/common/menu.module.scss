@@ -15,10 +15,16 @@
       row-gap: 5px;
       font-size: 16px;
       color: rgba(#666, 0.5);
+      transition: 0.2s all;
 
       .icon {
         fill: #666;
         fill-opacity: 0.5;
+        pointer-events: none;
+      }
+
+      span {
+        pointer-events: none;
       }
 
       &.active {

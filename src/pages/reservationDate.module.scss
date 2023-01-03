@@ -1,0 +1,105 @@
+.wrap {
+  overflow: scroll;
+
+  .date-wrap {
+    margin-top: 20px;
+
+    .sub-tit {
+      display: flex;
+      align-items: center;
+      padding: 10px 0;
+      border-top: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+      font-size: 17px;
+      color: #777;
+
+      .icon {
+        margin-right: 8px;
+        width: 17px;
+        fill: #888;
+
+        &.time {
+          width: 20px;
+        }
+      }
+    }
+
+    .date-btn-wrap {
+      position: relative;
+      display: flex;
+      margin: 20px 0;
+      width: 100%;
+      overflow: auto;
+      white-space: nowrap;
+
+      li {
+        button {
+          margin-left: -1px;
+          width: 130px;
+          height: 40px;
+          background-color: #fff;
+          border: 1px solid #CCC;
+          font-size: 18px;
+          font-weight: 600;
+          color: #666;
+
+          span {
+            font-size: 12px;
+            font-weight: 400;
+            color: #777;
+          }
+
+        }
+
+        &:first-child button {
+          margin-left: 1px;
+        }
+
+      }
+
+      .focus-box {
+        position: absolute;
+        width: 132px;
+        height: 40px;
+        border: 3px solid #FDDC3F;
+      }
+
+    }
+
+    .time-btn-wrap {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      row-gap: 15px;
+      flex-wrap: wrap;
+
+      li {
+        button {
+          width: 130px;
+          height: 35px;
+          background-color: #fff;
+          border: 1px solid #ccc;
+          font-size: 16px;
+          color: #555;
+
+          &.active {
+            background-color: #FDDC3F;
+            border: none;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+
+    .submit-btn {
+      margin-top: 50px;
+      padding: 14px 0;
+      width: 100%;
+      border-radius: 5px;
+      background-color: #FDDC3F;
+      font-size: 18px;
+      font-weight: bold;
+      color: #666;
+    }
+  }
+}

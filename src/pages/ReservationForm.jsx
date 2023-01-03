@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import React from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames/bind';
 
 import styles from './reservationForm.module.scss';
@@ -11,11 +11,21 @@ const cx = classNames.bind(styles);
 const NUMBER = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 function ReservationForm() {
+  const [clickKind, setClickKind] = useState('tel');
+
+  const clickKindBtnHandler = e => {
+    setClickKind(e.target.name);
+  };
+
+  const submitHandler = e => {
+    e.preventDefault();
+  };
+
   return (
     <div className={cx('wrap')}>
       <Pagination />
       <Title />
-      <form>
+      <form onSubmit={submitHandler}>
         <div className={cx('name-wrap', 'input-wrap')}>
           <label htmlFor='name' className={cx('left')}>
             이름
@@ -36,10 +46,20 @@ function ReservationForm() {
         <div className={cx('kind-wrap', 'input-wrap')}>
           <span className={cx('left')}>상담종류</span>
           <div className={cx('btn-wrap', 'right')}>
-            <button type='button' className={cx('btn', 'active')}>
+            <button
+              type='button'
+              className={cx(clickKind === 'tel' ? 'active' : '')}
+              name='tel'
+              onClick={clickKindBtnHandler}
+            >
               전화상담
             </button>
-            <button type='button' className={cx('btn')}>
+            <button
+              type='button'
+              className={cx(clickKind === 'store' ? 'active' : '')}
+              name='store'
+              onClick={clickKindBtnHandler}
+            >
               방문상담
             </button>
           </div>
