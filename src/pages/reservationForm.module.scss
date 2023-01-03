@@ -7,7 +7,7 @@
 
     .left {
       width: 25%;
-      font-size: 16px;
+      font-size: 1rem;
       font-weight: 500;
       color: #646464;
     }
@@ -22,7 +22,7 @@
       border-radius: 5px;
 
       &::placeholder {
-        font-size: 13px;
+        font-size: 0.8rem;
         color: rgba(#8B8585, 0.7);
       }
     }
@@ -56,7 +56,7 @@
           border: 1px solid #ccc;
           border-radius: 5px;
           background-color: #fff;
-          font-size: 14px;
+          font-size: 0.9rem;
           color: #888;
           transition: 0.2s all;
 
@@ -75,7 +75,7 @@
 
       select {
         -webkit-appearance: none;
-        font-size: 14px;
+        font-size: 0.8rem;
         color: #646464;
         text-align: center;
 
@@ -95,7 +95,7 @@
       width: 100%;
       border-radius: 5px;
       background-color: #FDDC3F;
-      font-size: 18px;
+      font-size: 1.2rem;
       font-weight: bold;
       color: #666;
     }

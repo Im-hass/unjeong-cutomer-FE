@@ -10,7 +10,7 @@
       padding: 10px 0;
       border-top: 1px solid #ccc;
       border-bottom: 1px solid #ccc;
-      font-size: 17px;
+      font-size: 1.2rem;
       color: #777;
 
       .icon {
@@ -39,12 +39,12 @@
           height: 40px;
           background-color: #fff;
           border: 1px solid #CCC;
-          font-size: 18px;
+          font-size: 1.2rem;
           font-weight: 600;
           color: #666;
 
           span {
-            font-size: 12px;
+            font-size: 1rem;
             font-weight: 400;
             color: #777;
           }
@@ -79,7 +79,7 @@
           height: 35px;
           background-color: #fff;
           border: 1px solid #ccc;
-          font-size: 16px;
+          font-size: 1.2rem;
           color: #555;
 
           &.active {
@@ -97,7 +97,7 @@
       width: 100%;
       border-radius: 5px;
       background-color: #FDDC3F;
-      font-size: 18px;
+      font-size: 1.2rem;
       font-weight: bold;
       color: #666;
     }
