@@ -1,5 +1,6 @@
 .wrap {
-  overflow: scroll;
+  padding: 80px 0 100px;
+  overflow: auto;
 
   .date-wrap {
     margin-top: 20px;
@@ -10,16 +11,16 @@
       padding: 10px 0;
       border-top: 1px solid #ccc;
       border-bottom: 1px solid #ccc;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       color: #777;
 
       .icon {
-        margin-right: 8px;
-        width: 17px;
+        margin-right: 6px;
+        width: 16px;
         fill: #888;
 
         &.time {
-          width: 20px;
+          width: 19px;
         }
       }
     }
@@ -92,7 +93,7 @@
     }
 
     .submit-btn {
-      margin-top: 50px;
+      margin-top: 25px;
       padding: 14px 0;
       width: 100%;
       border-radius: 5px;

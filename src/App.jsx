@@ -19,7 +19,7 @@ function App() {
       <div className='container-wrap'>
         <Routes>
           <Route path='/' element={<Main />} />
-          <Route path='reservation' element={<ReservationDate />} />
+          <Route path='reservation' element={<ReservationForm />} />
           {/* <Route path='reservationConfirm' element={<ReservationConfirm />} /> */}
         </Routes>
       </div>
