@@ -26,8 +26,7 @@ function ReservationForm() {
 
   return (
     <>
-      <ReservationConfirmModal />
-      {/* {openModal && <ReservationConfirmModal />} */}
+      {openModal && <ReservationConfirmModal />}
       <div className={cx('wrap')}>
         <Pagination />
         <Title />
