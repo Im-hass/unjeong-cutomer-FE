@@ -12,7 +12,7 @@ function ReservationDate() {
   return (
     <div className={cx('wrap')}>
       <Pagination />
-      <Title />
+      <Title txt='예약하기' />
       <form className={cx('date-wrap')}>
         <h3 className={cx('sub-tit')}>
           <ReservationBtn className={cx('icon')} />

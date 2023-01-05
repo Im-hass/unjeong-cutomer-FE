@@ -29,7 +29,7 @@ function ReservationForm() {
       {openModal && <ReservationConfirmModal />}
       <div className={cx('wrap')}>
         <Pagination />
-        <Title />
+        <Title txt='예약하기' />
         <form onSubmit={submitHandler}>
           <div className={cx('name-wrap', 'input-wrap')}>
             <label htmlFor='name' className={cx('left')}>
