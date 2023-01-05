@@ -1,0 +1,24 @@
+.img-wrap {
+  width: 100%;
+  // overflow: hidden;
+  text-align: center;
+
+  &:nth-child(n) {
+    margin-bottom: 15px;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+
+  .img-desc {
+    font-size: 0.8rem;
+    color: #666;
+  }
+}
