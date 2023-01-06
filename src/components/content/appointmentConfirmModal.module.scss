@@ -14,21 +14,21 @@
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 28px 24px;
-  width: 240px;
-  height: 280px;
+  width: 75%;
+  height: 320px;
   border-radius: 5px;
   background-color: #fff;
   z-index: 100;
 
   h2 {
-    margin-bottom: 8px;
-    font-size: 1rem;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
     font-weight: 300;
     line-height: 1.2;
     color: #666;
 
     strong {
-      font-size: 1.25rem;
+      font-size: 1.4rem;
       font-weight: 600;
     }
   }
@@ -44,7 +44,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 6px 10px;
+        padding: 7px 10px;
 
         &~.content-li {
           border-top: 1.5px solid #fff;
@@ -52,15 +52,15 @@
 
         dt {
           width: 30%;
-          font-size: 0.7rem;
+          font-size: 0.8rem;
           font-weight: 300;
           color: #888;
         }
 
         dd {
           width: 70%;
-          font-size: 0.85rem;
-          font-weight: 500;
+          font-size: 0.95rem;
+          font-weight: 400;
           color: #777;
           letter-spacing: -0.5px;
         }
@@ -71,14 +71,14 @@
   .btn-wrap {
     display: flex;
     justify-content: space-between;
-    margin-top: 8px;
+    margin-top: 15px;
 
     button {
-      height: 31px;
+      height: 35px;
       background-color: #FDDC3F;
       border-radius: 5px;
-      font-weight: 500;
-      font-size: 0.9rem;
+      font-weight: 600;
+      font-size: 1rem;
 
       &.submit-btn {
         width: 60%;
