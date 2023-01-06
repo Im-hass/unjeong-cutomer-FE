@@ -1,0 +1,111 @@
+.wrap {
+  padding: 80px 0 100px;
+  overflow: auto;
+
+  .date-wrap {
+    margin-top: 20px;
+
+    .sub-tit {
+      display: flex;
+      align-items: center;
+      padding: 8px 0;
+      border-top: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+      font-size: 1.1rem;
+      color: #777;
+
+      .icon {
+        margin-right: 6px;
+        width: 16px;
+        fill: #888;
+
+        &.time {
+          width: 19px;
+        }
+      }
+    }
+
+    .date-btn-wrap {
+      position: relative;
+      display: flex;
+      margin: 20px 0;
+      width: 100%;
+      overflow: auto;
+      white-space: nowrap;
+
+      li {
+        button {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-left: -1px;
+          width: 110px;
+          height: 35px;
+          background-color: #fff;
+          border: 1px solid #CCC;
+          font-size: 1.15rem;
+          font-weight: 600;
+          color: #666;
+          transition: 0.2s all;
+
+          span {
+            margin: 3px 0 0 2px;
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: #777;
+          }
+
+          &.active {
+            background-color: #FDDC3F;
+            border: none;
+            font-weight: 600;
+          }
+
+          &.disable {
+            background-color: #bbb;
+          }
+        }
+
+        &:first-child button {
+          margin-left: 1px;
+        }
+      }
+    }
+
+    .time-btn-wrap {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      row-gap: 8px;
+      flex-wrap: wrap;
+
+      li {
+        button {
+          width: 130px;
+          height: 32px;
+          background-color: #fff;
+          border: 1px solid #ccc;
+          font-size: 1rem;
+          color: #777;
+
+          &.active {
+            background-color: #FDDC3F;
+            border: none;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+
+    .submit-btn {
+      margin-top: 25px;
+      padding: 14px 0;
+      width: 100%;
+      border-radius: 5px;
+      background-color: #FDDC3F;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #666;
+    }
+  }
+}
