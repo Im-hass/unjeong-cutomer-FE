@@ -1,11 +1,18 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
-import styles from './reservationConfirmModal.module.scss';
+import styles from './appointmentConfirmModal.module.scss';
 
 const cx = classNames.bind(styles);
 
-function ReservationConfirmModal() {
+function AppointmentConfirmModal() {
+  const navigate = useNavigate();
+
+  const submitHandler = () => {
+    navigate('/appointmentDone');
+  };
+
   return (
     <>
       <div className={cx('backdrop')} />
@@ -39,7 +46,11 @@ function ReservationConfirmModal() {
           </dl>
         </div>
         <div className={cx('btn-wrap')}>
-          <button type='button' className={cx('submit-btn')}>
+          <button
+            type='button'
+            className={cx('submit-btn')}
+            onClick={submitHandler}
+          >
             예약하기
           </button>
           <button type='button' className={cx('cancel-btn')}>
@@ -51,4 +62,4 @@ function ReservationConfirmModal() {
   );
 }
 
-export default ReservationConfirmModal;
+export default AppointmentConfirmModal;

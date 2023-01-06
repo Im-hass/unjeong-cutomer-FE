@@ -6,9 +6,9 @@ import Header from './components/common/Header';
 import Menu from './components/common/Menu';
 import Nav from './components/common/Nav';
 import Main from './pages/Main';
-import ReservationDate from './pages/ReservationDate';
-import ReservationDone from './pages/ReservationDone';
-import ReservationForm from './pages/ReservationForm';
+import AppointmentDate from './pages/AppointmentDate';
+import AppointmentForm from './pages/AppointmentForm';
+import AppointmentDone from './pages/AppointmentDone';
 
 function App() {
   return (
@@ -20,8 +20,10 @@ function App() {
       <div className='container-wrap'>
         <Routes>
           <Route path='/' element={<Main />} />
-          <Route path='reservation' element={<ReservationDone />} />
-          {/* <Route path='reservationConfirm' element={<ReservationConfirm />} /> */}
+          <Route path='appointment' element={<AppointmentDate />} />
+          <Route path='appointmentForm' element={<AppointmentForm />} />
+          <Route path='appointmentDone' element={<AppointmentDone />} />
+          {/* <Route path='appointmentConfirm' element={<AppointmentConfirm />} /> */}
         </Routes>
       </div>
       <Menu />

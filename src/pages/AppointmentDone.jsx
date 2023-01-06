@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames/bind';
 
-import styles from './reservationDone.module.scss';
+import styles from './appointmentDone.module.scss';
 import Pagination from '../components/common/Pagination';
 import ShareIcon from '../assets/img/share-icon.png';
 import KakaoIcon from '../assets/img/kakao-icon.png';
@@ -9,10 +9,10 @@ import FacebookIcon from '../assets/img/facebook-icon.png';
 
 const cx = classNames.bind(styles);
 
-function ReservationDone() {
+function AppointmentDone() {
   return (
     <div className={cx('wrap')}>
-      <Pagination />
+      <Pagination pageNum={3} />
       <h2>
         <strong>예약완료</strong> 되었습니다.🎉
       </h2>
@@ -61,4 +61,4 @@ function ReservationDone() {
   );
 }
 
-export default ReservationDone;
+export default AppointmentDone;

@@ -7,7 +7,7 @@
     .sub-tit {
       display: flex;
       align-items: center;
-      padding: 10px 0;
+      padding: 8px 0;
       border-top: 1px solid #ccc;
       border-bottom: 1px solid #ccc;
       font-size: 1.1rem;
@@ -34,53 +34,58 @@
 
       li {
         button {
+          display: flex;
+          justify-content: center;
+          align-items: center;
           margin-left: -1px;
-          width: 130px;
-          height: 40px;
+          width: 110px;
+          height: 35px;
           background-color: #fff;
           border: 1px solid #CCC;
-          font-size: 1.2rem;
+          font-size: 1.15rem;
           font-weight: 600;
           color: #666;
+          transition: 0.2s all;
 
           span {
-            font-size: 1rem;
+            margin: 3px 0 0 2px;
+            font-size: 0.8rem;
             font-weight: 400;
             color: #777;
           }
 
+          &.active {
+            background-color: #FDDC3F;
+            border: none;
+            font-weight: 600;
+          }
+
+          &.disable {
+            background-color: #bbb;
+          }
         }
 
         &:first-child button {
           margin-left: 1px;
         }
-
       }
-
-      .focus-box {
-        position: absolute;
-        width: 132px;
-        height: 40px;
-        border: 3px solid #FDDC3F;
-      }
-
     }
 
     .time-btn-wrap {
       margin-top: 20px;
       display: flex;
       justify-content: space-between;
-      row-gap: 15px;
+      row-gap: 8px;
       flex-wrap: wrap;
 
       li {
         button {
           width: 130px;
-          height: 35px;
+          height: 32px;
           background-color: #fff;
           border: 1px solid #ccc;
-          font-size: 1.2rem;
-          color: #555;
+          font-size: 1rem;
+          color: #777;
 
           &.active {
             background-color: #FDDC3F;
