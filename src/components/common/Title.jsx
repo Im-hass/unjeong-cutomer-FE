@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classNames from 'classnames/bind';
 
 import styles from './title.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Title() {
+function Title({ name }) {
   return (
     <div className={cx('wrap')}>
-      <h2>예약하기</h2>
+      <h2>{name}</h2>
     </div>
   );
 }

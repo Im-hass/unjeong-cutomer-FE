@@ -2,16 +2,16 @@
 import React, { useState } from 'react';
 import classNames from 'classnames/bind';
 
-import styles from './reservationForm.module.scss';
+import styles from './appointmentForm.module.scss';
 import { DownArrowBtn } from '../assets/svg/index';
 import Pagination from '../components/common/Pagination';
 import Title from '../components/common/Title';
-import ReservationConfirmModal from '../components/content/ReservationConfirmModal';
+import AppointmentConfirmModal from '../components/content/AppointmentConfirmModal';
 
 const cx = classNames.bind(styles);
 const NUMBER = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-function ReservationForm() {
+function AppointmentForm() {
   const [clickKind, setClickKind] = useState('tel');
   const [openModal, setOpenModal] = useState(false);
 
@@ -26,10 +26,10 @@ function ReservationForm() {
 
   return (
     <>
-      {openModal && <ReservationConfirmModal />}
+      {openModal && <AppointmentConfirmModal />}
       <div className={cx('wrap')}>
-        <Pagination />
-        <Title />
+        <Pagination pageNum={2} />
+        <Title name='예약하기' />
         <form onSubmit={submitHandler}>
           <div className={cx('name-wrap', 'input-wrap')}>
             <label htmlFor='name' className={cx('left')}>
@@ -89,4 +89,4 @@ function ReservationForm() {
   );
 }
 
-export default ReservationForm;
+export default AppointmentForm;
