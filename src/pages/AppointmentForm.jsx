@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
 import styles from './appointmentForm.module.scss';
-import { DownArrowBtn } from '../assets/svg/index';
+import { DownArrowIcon, CheckIcon } from '../assets/svg/index';
 import Pagination from '../components/common/Pagination';
 import Title from '../components/common/Title';
 import AppointmentConfirmModal from '../components/content/AppointmentConfirmModal';
@@ -29,7 +29,7 @@ function AppointmentForm() {
     personalInformationCollectionAndUsageAgreement: true,
     privacyPolicyRead: true,
   });
-  const [clickKind, setClickKind] = useState('tel');
+  const [clickKind, setClickKind] = useState('CALL');
   const [openModal, setOpenModal] = useState(false);
 
   const clickKindBtnHandler = e => {
@@ -97,25 +97,38 @@ function AppointmentForm() {
                 </option>
               ))}
             </select>
-            <DownArrowBtn className={cx('icon')} />
+            <DownArrowIcon className={cx('icon')} />
           </div>
           <div className={cx('terms-wrap')}>
             <div className={cx('all-agree-wrap')}>
-              <input type='checkbox' id='allAgree' />
+              <div className={cx('checkbox-wrap')}>
+                <input type='checkbox' id='allAgree' />
+                <CheckIcon className={cx('icon')} />
+              </div>
               <label htmlFor='allAgree'>전부 동의</label>
             </div>
             <div className={cx('term')}>
-              <input type='checkbox' id='term1' />
-              <label htmlFor='term1'>
-                (필수)<strong>개인정보 수집 및 이용 동의</strong>
-              </label>
+              <div className={cx('term-left')}>
+                <div className={cx('checkbox-wrap')}>
+                  <input type='checkbox' id='term1' />
+                  <CheckIcon className={cx('icon')} />
+                </div>
+                <label htmlFor='term1'>
+                  <span>(필수)</span> 개인정보 수집 및 이용 동의
+                </label>
+              </div>
               <button type='button'>상세</button>
             </div>
             <div className={cx('term')}>
-              <input type='checkbox' id='term2' />
-              <label htmlFor='term2'>
-                (필수) <strong>개인정보 처리방침 읽음 여부</strong>
-              </label>
+              <div className={cx('term-left')}>
+                <div className={cx('checkbox-wrap')}>
+                  <input type='checkbox' id='term2' />
+                  <CheckIcon className={cx('icon')} />
+                </div>
+                <label htmlFor='term2'>
+                  <span>(필수)</span> 개인정보 처리방침 읽음 여부
+                </label>
+              </div>
               <button type='button'>상세</button>
             </div>
           </div>

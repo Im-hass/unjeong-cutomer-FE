@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 
 import styles from './appointmentDate.module.scss';
-import { AppointmentBtn, TimeBtn } from '../assets/svg';
+import { AppointmentIcon, TimeIcon } from '../assets/svg';
 import Pagination from '../components/common/Pagination';
 import Title from '../components/common/Title';
 import { getAppointmentTime } from '../store/api/appointment';
@@ -95,7 +95,7 @@ function AppointmentDate() {
       {!isLoading && (
         <form className={cx('date-wrap')} onSubmit={submitHandler}>
           <h3 className={cx('sub-tit')}>
-            <AppointmentBtn className={cx('icon')} />
+            <AppointmentIcon className={cx('icon')} />
             <span>날짜 선택</span>
           </h3>
           <ul className={cx('date-btn-wrap')}>
@@ -120,7 +120,7 @@ function AppointmentDate() {
               ))}
           </ul>
           <h3 className={cx('sub-tit')}>
-            <TimeBtn className={cx('icon', 'time')} />
+            <TimeIcon className={cx('icon', 'time')} />
             <span>시간 선택</span>
           </h3>
           <ul className={cx('time-btn-wrap')}>
