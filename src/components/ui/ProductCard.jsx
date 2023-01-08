@@ -32,7 +32,12 @@ function ProductCard({ imgUrl, productName, tags, price, time }) {
           </div>
         </div>
         <div className={cx('time-wrap')}>
-          <TimeIcon width={23} height={23} viewBox='0 0 14 14' />
+          <TimeIcon
+            width={23}
+            height={23}
+            viewBox='0 0 14 14'
+            className={cx('time-icon')}
+          />
           <div>
             <span className={cx('time')}>{time}</span>
             <span>분</span>

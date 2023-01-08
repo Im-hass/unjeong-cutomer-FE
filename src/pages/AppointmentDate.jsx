@@ -18,11 +18,10 @@ const DAY_ARR = ['일', '월', '화', '수', '목', '금', '토'];
 
 function AppointmentDate() {
   const navigate = useNavigate();
-  const todayApiParam = dayjs(TODAY).format('YYYY-MM-DD');
   let day = dayjs(TODAY).format('d');
 
-  const [availableTimeArr, setAvailableTimeArr] = useState([]);
   const [sevenDayArr, setSevenDayArr] = useState([]);
+  const [availableTimeArr, setAvailableTimeArr] = useState([]);
   const [clickDateBtn, setClickDateBtn] = useState('');
   const [clickDateBtnDay, setClickDateBtnDay] = useState('');
   const [clickTimeBtn, setClickTimeBtn] = useState('');
@@ -59,21 +58,19 @@ function AppointmentDate() {
     let params;
     if (clickDateBtn) {
       params = clickDateBtn;
-    } else params = todayApiParam;
-
-    getAppointmentTime(params)
-      .then(res => {
-        setAvailableTimeArr(res.data.data.availableTime);
-        console.log('API호출');
-      })
-      .catch(err => console.log(err));
+      getAppointmentTime(params)
+        .then(res => {
+          setAvailableTimeArr(res.data.data);
+        })
+        .catch(err => console.log(err));
+    }
     setIsLoading(false);
   }, [clickDateBtn]);
 
   const dateClickHandler = e => {
     const { name } = e.currentTarget;
     const tmpArr = name.split(' ');
-    setClickDateBtnDay(tmpArr[2]);
+    setClickDateBtnDay(`${tmpArr[1]} ${tmpArr[2]}`);
     setClickDateBtn(`${tmpArr[0]}-${tmpArr[1]}`);
   };
 
@@ -84,10 +81,11 @@ function AppointmentDate() {
 
   const submitHandler = e => {
     e.preventDefault();
-    navigate('/appointmentForm', {
+    const passData = {
       date: clickDateBtn,
       time: clickTimeBtn,
-    });
+    };
+    navigate('/appointmentForm', { state: passData });
   };
 
   return (
@@ -108,7 +106,9 @@ function AppointmentDate() {
                     type='button'
                     name={`${dates[0]} ${dates[1]} ${dates[2]}`}
                     className={cx(
-                      clickDateBtnDay === dates[2] ? 'active' : '',
+                      clickDateBtnDay === `${dates[1]} ${dates[2]}`
+                        ? 'active'
+                        : '',
                       dates[2] === '일' ? 'disable' : '',
                     )}
                     disabled={dates[2] === '일'}
@@ -129,11 +129,15 @@ function AppointmentDate() {
                 <li key={`time-${i}`}>
                   <button
                     type='button'
-                    name={time}
-                    className={cx(clickTimeBtn === time ? 'active' : '')}
+                    name={time.time}
+                    className={cx(
+                      clickTimeBtn === time.time ? 'active' : '',
+                      !time.isAvailable ? 'disable' : '',
+                    )}
+                    disabled={!time.isAvailable}
                     onClick={timeClickHandler}
                   >
-                    {time}:00
+                    {time.time}:00
                   </button>
                 </li>
               ))}

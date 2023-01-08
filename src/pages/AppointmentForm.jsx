@@ -1,5 +1,6 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
 import styles from './appointmentForm.module.scss';
@@ -12,6 +13,22 @@ const cx = classNames.bind(styles);
 const NUMBER = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 function AppointmentForm() {
+  const nameRef = useRef();
+  const phoneRef = useRef();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const [appointmentInfo, setAppointmentInfo] = useState({
+    name: '',
+    phone: '',
+    appointmentType: 'CALL',
+    numberOfPeople: 1,
+    appointmentDate: '2022-12-19',
+    appointmentHour: 13,
+    personalInformationCollectionAndUsageAgreement: true,
+    privacyPolicyRead: true,
+  });
   const [clickKind, setClickKind] = useState('tel');
   const [openModal, setOpenModal] = useState(false);
 
@@ -32,7 +49,7 @@ function AppointmentForm() {
         <Title name='예약하기' />
         <form onSubmit={submitHandler}>
           <div className={cx('name-wrap', 'input-wrap')}>
-            <label htmlFor='name' className={cx('left')}>
+            <label htmlFor='name' className={cx('left')} ref={nameRef}>
               이름
             </label>
             <input type='text' id='name' className={cx('right', 'input')} />
@@ -53,16 +70,16 @@ function AppointmentForm() {
             <div className={cx('btn-wrap', 'right')}>
               <button
                 type='button'
-                className={cx(clickKind === 'tel' ? 'active' : '')}
-                name='tel'
+                className={cx(clickKind === 'CALL' ? 'active' : '')}
+                name='CALL'
                 onClick={clickKindBtnHandler}
               >
                 전화상담
               </button>
               <button
                 type='button'
-                className={cx(clickKind === 'store' ? 'active' : '')}
-                name='store'
+                className={cx(clickKind === 'VISIT' ? 'active' : '')}
+                name='VISIT'
                 onClick={clickKindBtnHandler}
               >
                 방문상담
@@ -75,10 +92,32 @@ function AppointmentForm() {
             </label>
             <select className={cx('right', 'input')}>
               {NUMBER.map((num, i) => (
-                <option key={`num-${i}`}>{num}</option>
+                <option key={`num-${i}`} name={i}>
+                  {num}
+                </option>
               ))}
             </select>
             <DownArrowBtn className={cx('icon')} />
+          </div>
+          <div className={cx('terms-wrap')}>
+            <div className={cx('all-agree-wrap')}>
+              <input type='checkbox' id='allAgree' />
+              <label htmlFor='allAgree'>전부 동의</label>
+            </div>
+            <div className={cx('term')}>
+              <input type='checkbox' id='term1' />
+              <label htmlFor='term1'>
+                (필수)<strong>개인정보 수집 및 이용 동의</strong>
+              </label>
+              <button type='button'>상세</button>
+            </div>
+            <div className={cx('term')}>
+              <input type='checkbox' id='term2' />
+              <label htmlFor='term2'>
+                (필수) <strong>개인정보 처리방침 읽음 여부</strong>
+              </label>
+              <button type='button'>상세</button>
+            </div>
           </div>
           <button type='submit' className={cx('submit-btn')}>
             예약확정
