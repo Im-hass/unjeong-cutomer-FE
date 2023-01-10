@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames/bind';
-import StoreImg from './StoreImg';
+import StoreImg from '../ui/StoreImg';
 import imgUrl from '../../assets/img/1000x1000.png';
 
 import styles from './storeInfo.module.scss';
