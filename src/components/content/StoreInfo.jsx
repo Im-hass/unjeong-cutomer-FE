@@ -11,7 +11,7 @@ const cx = classNames.bind(styles);
 function StoreInfo() {
   return (
     <>
-      <Title txt='가게정보' />
+      <Title name='가게정보' />
 
       <div className={cx('imgs-wrap')}>
         <StoreImg url={imgUrl} alt='가게외부사진1' desc='가게 외부1' />
