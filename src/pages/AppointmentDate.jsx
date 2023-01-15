@@ -10,6 +10,7 @@ import { AppointmentBtn, TimeBtn } from '../assets/svg';
 import Pagination from '../components/common/Pagination';
 import Title from '../components/common/Title';
 import { getAppointmentTime } from '../store/api/appointment';
+import Nav from '../components/common/Nav';
 
 const cx = classNames.bind(styles);
 
@@ -91,59 +92,63 @@ function AppointmentDate() {
   };
 
   return (
-    <div className={cx('wrap')}>
-      <Pagination pageNum={1} />
-      <Title name='예약하기' />
-      {!isLoading && (
-        <form className={cx('date-wrap')} onSubmit={submitHandler}>
-          <h3 className={cx('sub-tit')}>
-            <AppointmentBtn className={cx('icon')} />
-            <span>날짜 선택</span>
-          </h3>
-          <ul className={cx('date-btn-wrap')}>
-            {sevenDayArr &&
-              sevenDayArr.map((dates, i) => (
-                <li key={`date-${i}`}>
-                  <button
-                    type='button'
-                    name={`${dates[0]} ${dates[1]} ${dates[2]}`}
-                    className={cx(
-                      clickDateBtnDay === dates[2] ? 'active' : '',
-                      dates[2] === '일' ? 'disable' : '',
-                    )}
-                    disabled={dates[2] === '일'}
-                    onClick={dateClickHandler}
-                  >
-                    {dates[1]} <span>({dates[2]})</span>
-                  </button>
-                </li>
-              ))}
-          </ul>
-          <h3 className={cx('sub-tit')}>
-            <TimeBtn className={cx('icon', 'time')} />
-            <span>시간 선택</span>
-          </h3>
-          <ul className={cx('time-btn-wrap')}>
-            {availableTimeArr &&
-              availableTimeArr.map((time, i) => (
-                <li key={`time-${i}`}>
-                  <button
-                    type='button'
-                    name={time}
-                    className={cx(clickTimeBtn === time ? 'active' : '')}
-                    onClick={timeClickHandler}
-                  >
-                    {time}:00
-                  </button>
-                </li>
-              ))}
-          </ul>
-          <button type='submit' className={cx('submit-btn')}>
-            다음으로
-          </button>
-        </form>
-      )}
-    </div>
+    <>
+      <Nav menus={[]} />
+
+      <div className={cx('wrap')}>
+        <Pagination pageNum={1} />
+        <Title name='예약하기' />
+        {!isLoading && (
+          <form className={cx('date-wrap')} onSubmit={submitHandler}>
+            <h3 className={cx('sub-tit')}>
+              <AppointmentBtn className={cx('icon')} />
+              <span>날짜 선택</span>
+            </h3>
+            <ul className={cx('date-btn-wrap')}>
+              {sevenDayArr &&
+                sevenDayArr.map((dates, i) => (
+                  <li key={`date-${i}`}>
+                    <button
+                      type='button'
+                      name={`${dates[0]} ${dates[1]} ${dates[2]}`}
+                      className={cx(
+                        clickDateBtnDay === dates[2] ? 'active' : '',
+                        dates[2] === '일' ? 'disable' : '',
+                      )}
+                      disabled={dates[2] === '일'}
+                      onClick={dateClickHandler}
+                    >
+                      {dates[1]} <span>({dates[2]})</span>
+                    </button>
+                  </li>
+                ))}
+            </ul>
+            <h3 className={cx('sub-tit')}>
+              <TimeBtn className={cx('icon', 'time')} />
+              <span>시간 선택</span>
+            </h3>
+            <ul className={cx('time-btn-wrap')}>
+              {availableTimeArr &&
+                availableTimeArr.map((time, i) => (
+                  <li key={`time-${i}`}>
+                    <button
+                      type='button'
+                      name={time}
+                      className={cx(clickTimeBtn === time ? 'active' : '')}
+                      onClick={timeClickHandler}
+                    >
+                      {time}:00
+                    </button>
+                  </li>
+                ))}
+            </ul>
+            <button type='submit' className={cx('submit-btn')}>
+              다음으로
+            </button>
+          </form>
+        )}
+      </div>
+    </>
   );
 }
 

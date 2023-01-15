@@ -7,6 +7,7 @@ import { DownArrowBtn } from '../assets/svg/index';
 import Pagination from '../components/common/Pagination';
 import Title from '../components/common/Title';
 import AppointmentConfirmModal from '../components/content/AppointmentConfirmModal';
+import Nav from '../components/common/Nav';
 
 const cx = classNames.bind(styles);
 const NUMBER = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -26,6 +27,8 @@ function AppointmentForm() {
 
   return (
     <>
+      <Nav menus={[]} />
+
       {openModal && <AppointmentConfirmModal />}
       <div className={cx('wrap')}>
         <Pagination pageNum={2} />
