@@ -14,7 +14,7 @@ function ProductInfo() {
 
   return (
     <>
-      <Title txt='상품정보' />
+      <Title name='상품정보' />
 
       <div className={cx('productCard-wrap')}>
         <ProductCard

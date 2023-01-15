@@ -1,0 +1,29 @@
+.infoTxt-wrap {
+  padding: 2px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: #888;
+  border-bottom: 1px solid #CCC;
+
+  svg {
+    margin-right: 10px;
+  }
+
+  .desc {
+    margin-right: 10px;
+    font-size: 0.8rem;
+  }
+
+  .txt {
+    margin-right: 2px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #555;
+  }
+}
+
+.f-s {
+  justify-content: flex-start
+}

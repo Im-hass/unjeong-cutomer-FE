@@ -2,26 +2,21 @@ import React from 'react';
 import classNames from 'classnames/bind';
 
 import styles from './nav.module.scss';
+import NavItem from '../ui/NavItem';
 
 const cx = classNames.bind(styles);
 
-function Nav() {
+function Nav({ menus }) {
   return (
-    <nav className={cx('wrap')}>
-      <ul>
-        <li>
-          <button type='button' className={cx('active')}>
-            가게정보
-          </button>
-        </li>
-        <li>
-          <button type='button'>상품정보</button>
-        </li>
-        <li>
-          <button type='button'>가게위치</button>
-        </li>
-      </ul>
-    </nav>
+    <div className={cx('nav-wrap')}>
+      <nav>
+        <ul>
+          {menus.map(v => (
+            <NavItem key={v.url} url={v.url} text={v.text} />
+          ))}
+        </ul>
+      </nav>
+    </div>
   );
 }
 
