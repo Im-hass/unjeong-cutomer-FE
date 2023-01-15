@@ -32,7 +32,7 @@ function Menu() {
       </li>
       <li>
         <Link
-          to='Appointment'
+          to='appointment'
           className={cx(clickMenu === 'appointment' ? 'active' : '')}
           name='appointment'
           onClick={clickMenuHandler}

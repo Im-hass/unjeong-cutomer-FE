@@ -1,6 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import classNames from 'classnames/bind';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
@@ -81,11 +82,15 @@ function AppointmentDate() {
 
   const submitHandler = e => {
     e.preventDefault();
-    const passData = {
-      date: clickDateBtn,
-      time: clickTimeBtn,
-    };
-    navigate('/appointmentForm', { state: passData });
+    if (clickDateBtn === '' || clickTimeBtn === '')
+      toast.error('예약일자 또는 예약시간을 선택해주세요.');
+    else if (clickDateBtn && clickDateBtn) {
+      const passData = {
+        date: clickDateBtn,
+        time: clickTimeBtn,
+      };
+      navigate('/appointmentForm', { state: passData });
+    }
   };
 
   return (

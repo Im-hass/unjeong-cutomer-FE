@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
 import styles from './appointmentDone.module.scss';
@@ -10,6 +11,8 @@ import FacebookIcon from '../assets/img/facebook-icon.png';
 const cx = classNames.bind(styles);
 
 function AppointmentDone() {
+  const location = useLocation();
+
   return (
     <div className={cx('wrap')}>
       <Pagination pageNum={3} />
@@ -20,23 +23,30 @@ function AppointmentDone() {
         <dl>
           <div className={cx('content-li')}>
             <dt>이름</dt>
-            <dd>홍길동</dd>
+            <dd>{location.state.name}</dd>
           </div>
           <div className={cx('content-li')}>
             <dt>연락처</dt>
-            <dd>010-1234-5678</dd>
+            <dd>{location.state.phone}</dd>
           </div>
           <div className={cx('content-li')}>
             <dt>상담종류</dt>
-            <dd>전화상담</dd>
+            <dd>
+              {location.state.appointmentType === 'CALL'
+                ? '전화상담'
+                : '방문상담'}
+            </dd>
           </div>
           <div className={cx('content-li')}>
             <dt>상담인원</dt>
-            <dd>1명</dd>
+            <dd>{location.state.numberOfPeople}</dd>
           </div>
           <div className={cx('content-li')}>
             <dt>상담날짜</dt>
-            <dd>2022-12-22 / 13:00</dd>
+            <dd>
+              {location.state.appointmentDate} /{' '}
+              {location.state.appointmentHour}:00
+            </dd>
           </div>
         </dl>
       </div>
