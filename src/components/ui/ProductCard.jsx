@@ -3,6 +3,7 @@ import classNames from 'classnames/bind';
 import { PriceIcon, TimeIcon } from '../../assets/svg/index';
 
 import styles from './productCard.module.scss';
+import InfoTxt from './InfoTxt';
 
 const cx = classNames.bind(styles);
 
@@ -21,28 +22,26 @@ function ProductCard({ imgUrl, productName, tags, price, time }) {
             </span>
           ))}
         </div>
-        <div className={cx('price-wrap')}>
-          <PriceIcon width={23} height={23} viewBox='0 0 14 14' />
-          <div>
-            {productName === '타로' && (
-              <span className={cx('desc')}>셔플당</span>
-            )}
-            <span className={cx('price')}>{price}</span>
-            <span>원</span>
-          </div>
-        </div>
-        <div className={cx('time-wrap')}>
-          <TimeIcon
-            width={23}
-            height={23}
-            viewBox='0 0 14 14'
-            className={cx('time-icon')}
-          />
-          <div>
-            <span className={cx('time')}>{time}</span>
-            <span>분</span>
-          </div>
-        </div>
+
+        <InfoTxt
+          Icon={PriceIcon}
+          w={23}
+          h={23}
+          viewBox='0 0 14 14'
+          productName='사주'
+          txt={price}
+          unit='원'
+        />
+
+        <InfoTxt
+          Icon={TimeIcon}
+          w={23}
+          h={23}
+          viewBox='0 0 14 14'
+          productName='사주'
+          txt={time}
+          unit='분'
+        />
       </div>
     </div>
   );

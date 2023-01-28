@@ -11,6 +11,7 @@ import { AppointmentIcon, TimeIcon } from '../assets/svg';
 import Pagination from '../components/common/Pagination';
 import Title from '../components/common/Title';
 import { getAppointmentTime } from '../store/api/appointment';
+import Nav from '../components/common/Nav';
 
 const cx = classNames.bind(styles);
 

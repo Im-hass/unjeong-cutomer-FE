@@ -7,6 +7,7 @@ import Pagination from '../components/common/Pagination';
 import ShareIcon from '../assets/img/share-icon.png';
 import KakaoIcon from '../assets/img/kakao-icon.png';
 import FacebookIcon from '../assets/img/facebook-icon.png';
+import Nav from '../components/common/Nav';
 
 const cx = classNames.bind(styles);
 

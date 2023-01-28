@@ -1,0 +1,65 @@
+.appointmentList-wrap {
+  .info-wrap {
+    font-size: 0.8rem;
+    margin-bottom: 14px;
+
+    .name-wrap {
+      font-size: 1rem;
+      margin-bottom: 10px;
+
+      .name {
+        font-size: 1.3rem;
+        font-weight: bold;
+        padding-right: 4px;
+      }
+    }
+
+    .types {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+
+      li {
+        position: relative;
+        padding-left: 10px;
+        margin-right: 16px;
+      }
+
+      li:last-child {
+        margin-right: 0px;
+      }
+      
+      li::before {
+        content: '';
+        width: 6px;
+        height: 6px;
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        border-radius: 50%;
+        transform: translateY(-50%);
+      }
+
+      .standby::before {
+        background-color: #CF8BFC;
+      }
+
+      .cancelled::before {
+        background-color: #666666;
+      }
+
+      .completed::before {
+        background-color: #FDDC3F;
+      }
+    }
+  }
+
+  .items-wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}

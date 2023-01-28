@@ -5,3 +5,6 @@ export { ReactComponent as DownArrowIcon } from './down-arrow-icon.svg';
 export { ReactComponent as PriceIcon } from './price-icon.svg';
 export { ReactComponent as TimeIcon } from './time-icon.svg';
 export { ReactComponent as CheckIcon } from './check-icon.svg';
+export { ReactComponent as SpotIcon } from './spot.svg';
+export { ReactComponent as OpenArrow } from './openArrow.svg';
+export { ReactComponent as CloseArrow } from './closeArrow.svg';
