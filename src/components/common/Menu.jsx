@@ -4,9 +4,9 @@ import classNames from 'classnames/bind';
 
 import styles from './menu.module.scss';
 import {
-  StoreBtn,
-  AppointmentBtn,
-  AppointmentConfirmBtn,
+  StoreIcon,
+  AppointmentIcon,
+  AppointmentConfirmIcon,
 } from '../../assets/svg/index';
 
 const cx = classNames.bind(styles);
@@ -26,18 +26,18 @@ function Menu() {
           name='info'
           onClick={clickMenuHandler}
         >
-          <StoreBtn className={cx('icon')} />
+          <StoreIcon className={cx('icon')} />
           <span>가게정보</span>
         </Link>
       </li>
       <li>
         <Link
-          to='Appointment'
+          to='appointment'
           className={cx(clickMenu === 'appointment' ? 'active' : '')}
           name='appointment'
           onClick={clickMenuHandler}
         >
-          <AppointmentBtn className={cx('icon')} />
+          <AppointmentIcon className={cx('icon')} />
           <span>예약하기</span>
         </Link>
       </li>
@@ -48,7 +48,7 @@ function Menu() {
           name='confirm'
           onClick={clickMenuHandler}
         >
-          <AppointmentConfirmBtn className={cx('icon')} />
+          <AppointmentConfirmIcon className={cx('icon')} />
           <span>예약확인</span>
         </Link>
       </li>

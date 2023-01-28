@@ -1,10 +1,10 @@
-export { ReactComponent as StoreBtn } from './store.svg';
-export { ReactComponent as AppointmentBtn } from './calendar.svg';
-export { ReactComponent as AppointmentConfirmBtn } from './appointment-confirm.svg';
-export { ReactComponent as DownArrowBtn } from './down-arrow.svg';
-export { ReactComponent as TimeBtn } from './time.svg';
+export { ReactComponent as StoreIcon } from './store-icon.svg';
+export { ReactComponent as AppointmentIcon } from './calendar-icon.svg';
+export { ReactComponent as AppointmentConfirmIcon } from './appointment-confirm-icon.svg';
+export { ReactComponent as DownArrowIcon } from './down-arrow-icon.svg';
 export { ReactComponent as PriceIcon } from './price-icon.svg';
 export { ReactComponent as TimeIcon } from './time-icon.svg';
+export { ReactComponent as CheckIcon } from './check-icon.svg';
 export { ReactComponent as SpotIcon } from './spot.svg';
 export { ReactComponent as OpenArrow } from './openArrow.svg';
 export { ReactComponent as CloseArrow } from './closeArrow.svg';

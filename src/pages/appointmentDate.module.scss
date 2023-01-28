@@ -92,6 +92,10 @@
             border: none;
             font-weight: 600;
           }
+
+          &.disable {
+            background-color: #bbb;
+          }
         }
       }
     }

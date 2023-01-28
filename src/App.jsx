@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 
 import './app.scss';
 import Header from './components/common/Header';
@@ -40,6 +41,14 @@ function App() {
         </Routes>
       </div>
       <Menu />
+      <Toaster
+        containerStyle={{
+          top: 30,
+        }}
+        toastOptions={{
+          duration: 2000,
+        }}
+      />
     </div>
   );
 }

@@ -1,16 +1,28 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import classNames from 'classnames/bind';
 
 import styles from './appointmentConfirmModal.module.scss';
+import { addAppointment } from '../../store/api/appointment';
 
 const cx = classNames.bind(styles);
 
-function AppointmentConfirmModal() {
+function AppointmentConfirmModal({ appointmentInfo, setOpenModal }) {
   const navigate = useNavigate();
 
+  const clickCancelBtnHandler = () => {
+    setOpenModal(false);
+  };
   const submitHandler = () => {
-    navigate('/appointmentDone');
+    addAppointment(appointmentInfo)
+      .then(() => {
+        navigate('/appointmentDone', { state: appointmentInfo });
+      })
+      .catch(err => {
+        toast.error(err.response.data.errorMessage);
+        navigate('/appointment');
+      });
   };
 
   return (
@@ -25,23 +37,30 @@ function AppointmentConfirmModal() {
           <dl>
             <div className={cx('content-li')}>
               <dt>이름</dt>
-              <dd>홍길동</dd>
+              <dd>{appointmentInfo.name}</dd>
             </div>
             <div className={cx('content-li')}>
               <dt>연락처</dt>
-              <dd>010-1234-5678</dd>
+              <dd>{appointmentInfo.phone}</dd>
             </div>
             <div className={cx('content-li')}>
               <dt>상담종류</dt>
-              <dd>전화상담</dd>
+              <dd>
+                {appointmentInfo.appointmentType === 'CALL'
+                  ? '전화상담'
+                  : '방문상담'}
+              </dd>
             </div>
             <div className={cx('content-li')}>
               <dt>상담인원</dt>
-              <dd>1명</dd>
+              <dd>{appointmentInfo.numberOfPeople}명</dd>
             </div>
             <div className={cx('content-li')}>
               <dt>상담날짜</dt>
-              <dd>2022-12-22 / 13:00</dd>
+              <dd>
+                {appointmentInfo.appointmentDate} /{' '}
+                {appointmentInfo.appointmentHour}:00
+              </dd>
             </div>
           </dl>
         </div>
@@ -53,7 +72,11 @@ function AppointmentConfirmModal() {
           >
             예약하기
           </button>
-          <button type='button' className={cx('cancel-btn')}>
+          <button
+            type='button'
+            className={cx('cancel-btn')}
+            onClick={clickCancelBtnHandler}
+          >
             취소
           </button>
         </div>
