@@ -11,7 +11,6 @@ import { AppointmentIcon, TimeIcon } from '../assets/svg';
 import Pagination from '../components/common/Pagination';
 import Title from '../components/common/Title';
 import { getAppointmentTime } from '../store/api/appointment';
-import Nav from '../components/common/Nav';
 
 const cx = classNames.bind(styles);
 
@@ -131,19 +130,19 @@ function AppointmentDate() {
           </h3>
           <ul className={cx('time-btn-wrap')}>
             {availableTimeArr &&
-              availableTimeArr.map((time, i) => (
+              availableTimeArr.map((timeArr, i) => (
                 <li key={`time-${i}`}>
                   <button
                     type='button'
-                    name={time.time}
+                    name={timeArr.time}
                     className={cx(
-                      clickTimeBtn === time.time ? 'active' : '',
-                      !time.isAvailable ? 'disable' : '',
+                      clickTimeBtn === timeArr.time ? 'active' : '',
+                      !timeArr.isAvailable ? 'disable' : '',
                     )}
-                    disabled={!time.isAvailable}
+                    disabled={!timeArr.isAvailable}
                     onClick={timeClickHandler}
                   >
-                    {time.time}:00
+                    {timeArr.time}:00
                   </button>
                 </li>
               ))}
