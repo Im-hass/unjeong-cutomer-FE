@@ -12,6 +12,9 @@
   ul {
     display: flex;
     justify-content: center;
+    align-items: center;
     column-gap: 34px;
+    margin-top: -1px;
+    height: 30px;
   }
 }
