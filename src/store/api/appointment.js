@@ -12,3 +12,9 @@ export const addAppointment = async data => {
   const res = await basicRequest.post(SERVICE, data);
   return res;
 };
+
+export const getMyAppointmentList = async data => {
+  const params = data;
+  const res = await basicRequest.post(`${SERVICE}/my`, params);
+  return res;
+};

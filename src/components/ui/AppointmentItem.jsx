@@ -8,17 +8,18 @@ import { CloseArrow, OpenArrow } from '../../assets/svg';
 
 const cx = classNames.bind(styles);
 const state = 'standby';
-function AppointmentItem() {
+
+function AppointmentItem({ list }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOpen = () => {
     setIsOpen(!isOpen);
   };
   return (
-    <div className={cx('appointmentItem-wrap')}>
+    <li className={cx('appointmentItem-wrap')}>
       <div className={cx('title', state)} onClick={handleOpen}>
-        <span>2022-12-19</span>
-        <span>13:00</span>
+        <span>{list.appointmentDate}</span>
+        <span>{list.appointmentTime}:00</span>
         {isOpen ? <OpenArrow /> : <CloseArrow />}
       </div>
       {isOpen && (
@@ -26,15 +27,15 @@ function AppointmentItem() {
           <ul>
             <li>
               <span>예약상태</span>
-              <span>상담대기중</span>
+              <span>{list.appointmentState}</span>
             </li>
             <li>
               <span>상담종류</span>
-              <span>전화상담</span>
+              <span>{list.appointmentType}</span>
             </li>
             <li>
               <span>인원</span>
-              <span>1명</span>
+              <span>{list.numberOfPeople}명</span>
             </li>
           </ul>
 
@@ -44,7 +45,7 @@ function AppointmentItem() {
           </div>
         </div>
       )}
-    </div>
+    </li>
   );
 }
 
