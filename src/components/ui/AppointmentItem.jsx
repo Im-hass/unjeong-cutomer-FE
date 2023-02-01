@@ -9,12 +9,18 @@ import { CloseArrow, OpenArrow } from '../../assets/svg';
 const cx = classNames.bind(styles);
 const state = 'standby';
 
-function AppointmentItem({ list }) {
+function AppointmentItem({ list, setOpenAlert, setClickAppointment }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOpen = () => {
     setIsOpen(!isOpen);
   };
+
+  const appointmentChangeBtnClickHandler = () => {
+    setClickAppointment(list);
+    setOpenAlert(true);
+  };
+
   return (
     <li className={cx('appointmentItem-wrap')}>
       <div className={cx('title', state)} onClick={handleOpen}>
@@ -40,7 +46,9 @@ function AppointmentItem({ list }) {
           </ul>
 
           <div className={cx('btn-wrap')}>
-            <button type='button'>예약변경</button>
+            <button type='button' onClick={appointmentChangeBtnClickHandler}>
+              예약변경
+            </button>
             <button type='button'>예약취소</button>
           </div>
         </div>

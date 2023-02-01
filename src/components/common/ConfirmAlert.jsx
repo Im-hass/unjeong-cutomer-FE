@@ -3,16 +3,22 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import classNames from 'classnames/bind';
 
-import styles from './appointmentConfirmModal.module.scss';
+import styles from './confirmAlert.module.scss';
 import { addAppointment } from '../../store/api/appointment';
 
 const cx = classNames.bind(styles);
 
-function AppointmentConfirmModal({ appointmentInfo, setOpenModal }) {
+function ConfirmAlert({
+  page,
+  info,
+  appointmentInfo,
+  enteredData,
+  setOpenAlert,
+}) {
   const navigate = useNavigate();
 
   const clickCancelBtnHandler = () => {
-    setOpenModal(false);
+    setOpenAlert(false);
   };
   const submitHandler = () => {
     addAppointment(appointmentInfo)
@@ -30,18 +36,22 @@ function AppointmentConfirmModal({ appointmentInfo, setOpenModal }) {
       <div className={cx('backdrop')} />
       <div className={cx('modal-wrap')}>
         <h2>
-          아래의 정보로 <br />
-          <strong>예약하시겠습니까?</strong>
+          {info.subTit} <br />
+          <strong>{info.tit}</strong>
         </h2>
         <div className={cx('content-wrap')}>
           <dl>
             <div className={cx('content-li')}>
               <dt>이름</dt>
-              <dd>{appointmentInfo.name}</dd>
+              <dd>
+                {page === 'create' ? appointmentInfo.name : enteredData.name}
+              </dd>
             </div>
             <div className={cx('content-li')}>
               <dt>연락처</dt>
-              <dd>{appointmentInfo.phone}</dd>
+              <dd>
+                {page === 'create' ? appointmentInfo.phone : enteredData.phone}
+              </dd>
             </div>
             <div className={cx('content-li')}>
               <dt>상담종류</dt>
@@ -70,7 +80,7 @@ function AppointmentConfirmModal({ appointmentInfo, setOpenModal }) {
             className={cx('submit-btn')}
             onClick={submitHandler}
           >
-            예약하기
+            {info.btnContent}
           </button>
           <button
             type='button'
@@ -85,4 +95,4 @@ function AppointmentConfirmModal({ appointmentInfo, setOpenModal }) {
   );
 }
 
-export default AppointmentConfirmModal;
+export default ConfirmAlert;

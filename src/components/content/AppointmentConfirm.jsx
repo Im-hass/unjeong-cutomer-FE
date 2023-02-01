@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import classNames from 'classnames/bind';
 import toast from 'react-hot-toast';
 
@@ -15,33 +15,28 @@ function AppointmentConfirm() {
 
   const [isActive, setIsActive] = useState(false);
   const [enteredData, setEnteredData] = useState();
-  const [appointmentList, setAppointmentList] = useState();
+  const [getAppointmentList, setGetAppointmentList] = useState();
 
   const onHandleSubmit = e => {
     e.preventDefault();
     const nameValue = nameRef.current.value;
     const phoneValue = phoneRef.current.value;
-    const params = {
-      name: nameValue,
-      phone: phoneValue,
-    };
 
     if (nameValue !== '' && phoneValue !== '') {
+      const params = {
+        name: nameValue,
+        phone: phoneValue,
+      };
+
       setEnteredData(params);
       getMyAppointmentList(params)
         .then(res => {
-          setAppointmentList(res.data.data.appointmentList);
+          setGetAppointmentList(res.data.data.appointmentList);
           setIsActive(true);
         })
         .catch(err => toast.error(err.response.data.errorMessage));
     }
   };
-
-  useEffect(() => {
-    if (isActive) {
-      setIsActive(false);
-    }
-  }, []);
 
   return (
     <div className={cx('appointmentConfirm-wrap')}>
@@ -50,7 +45,7 @@ function AppointmentConfirm() {
       {isActive ? (
         <AppointmentList
           enteredData={enteredData}
-          appointmentList={appointmentList}
+          appointmentList={getAppointmentList}
         />
       ) : (
         <form onSubmit={onHandleSubmit}>
@@ -66,7 +61,6 @@ function AppointmentConfirm() {
               required
             />
           </div>
-
           <div className={cx('phone-wrap', 'input-wrap')}>
             <label htmlFor='phone' className={cx('left')}>
               연락처
@@ -82,7 +76,6 @@ function AppointmentConfirm() {
               required
             />
           </div>
-
           <button type='submit' className={cx('submit-btn')}>
             예약조회
           </button>

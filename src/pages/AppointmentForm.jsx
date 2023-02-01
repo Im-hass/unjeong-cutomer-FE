@@ -8,10 +8,15 @@ import styles from './appointmentForm.module.scss';
 import { DownArrowIcon, CheckIcon } from '../assets/svg/index';
 import Pagination from '../components/common/Pagination';
 import Title from '../components/common/Title';
-import AppointmentConfirmModal from '../components/content/AppointmentConfirmModal';
+import ConfirmAlert from '../components/common/ConfirmAlert';
 
 const cx = classNames.bind(styles);
 const NUMBER = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const ALERT_DATA = {
+  subTit: '아래의 정보로',
+  tit: '예약하시겠습니까?',
+  btnContent: '예약하기',
+};
 
 function AppointmentForm() {
   const nameRef = useRef();
@@ -19,7 +24,7 @@ function AppointmentForm() {
 
   const location = useLocation();
 
-  const [openModal, setOpenModal] = useState(false);
+  const [openAlert, setOpenAlert] = useState(false);
   const [appointmentInfo, setAppointmentInfo] = useState({
     name: '',
     phone: '',
@@ -77,16 +82,18 @@ function AppointmentForm() {
       appointmentInfo.personalInformationCollectionAndUsageAgreement &&
       appointmentInfo.privacyPolicyRead
     )
-      setOpenModal(true);
+      setOpenAlert(true);
     else toast.error('필수 동의를 체크해주세요.');
   };
 
   return (
     <>
-      {openModal && (
-        <AppointmentConfirmModal
+      {openAlert && (
+        <ConfirmAlert
+          page='create'
+          info={ALERT_DATA}
           appointmentInfo={appointmentInfo}
-          setOpenModal={setOpenModal}
+          setOpenAlert={setOpenAlert}
         />
       )}
       <div className={cx('wrap')}>
