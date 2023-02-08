@@ -7,18 +7,37 @@ import styles from './appointmentItem.module.scss';
 import { CloseArrow, OpenArrow } from '../../assets/svg';
 
 const cx = classNames.bind(styles);
-const state = 'standby';
-function AppointmentItem() {
+
+function AppointmentItem({
+  list,
+  setOpenAlert,
+  setClickAppointment,
+  setPrevPage,
+}) {
+  const state = list.appointmentState;
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOpen = () => {
     setIsOpen(!isOpen);
   };
+
+  const appointmentChangeBtnClickHandler = () => {
+    setPrevPage('changeConfirm');
+    setClickAppointment(list);
+    setOpenAlert(true);
+  };
+
+  const appointmentCancelBtnClickHandler = () => {
+    setPrevPage('cancel');
+    setClickAppointment(list);
+    setOpenAlert(true);
+  };
+
   return (
-    <div className={cx('appointmentItem-wrap')}>
+    <li className={cx('appointmentItem-wrap')}>
       <div className={cx('title', state)} onClick={handleOpen}>
-        <span>2022-12-19</span>
-        <span>13:00</span>
+        <span>{list.appointmentDate}</span>
+        <span>{list.appointmentHour}:00</span>
         {isOpen ? <OpenArrow /> : <CloseArrow />}
       </div>
       {isOpen && (
@@ -26,25 +45,49 @@ function AppointmentItem() {
           <ul>
             <li>
               <span>예약상태</span>
-              <span>상담대기중</span>
+              <span>
+                {list.appointmentState === 'WAITING' && '상담대기중'}
+                {list.appointmentState === 'CANCELED' && '예약취소됨'}
+                {list.appointmentState === 'DONE' && '상담완료'}
+              </span>
             </li>
             <li>
               <span>상담종류</span>
-              <span>전화상담</span>
+              <span>
+                {list.appointmentType === 'CALL' ? '전화상담' : '방문상담'}
+              </span>
             </li>
             <li>
               <span>인원</span>
-              <span>1명</span>
+              <span>{list.numberOfPeople}명</span>
             </li>
           </ul>
 
           <div className={cx('btn-wrap')}>
-            <button type='button'>예약변경</button>
-            <button type='button'>예약취소</button>
+            <button
+              type='button'
+              onClick={appointmentChangeBtnClickHandler}
+              disabled={
+                list.appointmentState === 'CANCELED' ||
+                list.appointmentState === 'DONE'
+              }
+            >
+              예약변경
+            </button>
+            <button
+              type='button'
+              onClick={appointmentCancelBtnClickHandler}
+              disabled={
+                list.appointmentState === 'CANCELED' ||
+                list.appointmentState === 'DONE'
+              }
+            >
+              예약취소
+            </button>
           </div>
         </div>
       )}
-    </div>
+    </li>
   );
 }
 

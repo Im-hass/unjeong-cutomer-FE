@@ -5,7 +5,6 @@ import { Toaster } from 'react-hot-toast';
 import './app.scss';
 import Header from './components/common/Header';
 import Menu from './components/common/Menu';
-import Nav from './components/common/Nav';
 import Main from './pages/Main';
 import AppointmentDate from './pages/AppointmentDate';
 import AppointmentForm from './pages/AppointmentForm';
