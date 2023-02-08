@@ -30,6 +30,14 @@
         align-items: center;
         padding: 10px 26px;
 
+        &.changed {
+          background-color: #fff9cb;
+
+          dd {
+            font-weight: 600;
+          }
+        }
+
         &~.content-li {
           border-top: 1.5px solid #F8F8F8;
         }

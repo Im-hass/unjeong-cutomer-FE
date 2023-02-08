@@ -14,7 +14,7 @@ function AppointmentConfirm() {
   const phoneRef = useRef();
 
   const [isActive, setIsActive] = useState(false);
-  const [enteredData, setEnteredData] = useState();
+  const [userInfo, setUserInfo] = useState();
   const [getAppointmentList, setGetAppointmentList] = useState();
 
   const onHandleSubmit = e => {
@@ -28,7 +28,7 @@ function AppointmentConfirm() {
         phone: phoneValue,
       };
 
-      setEnteredData(params);
+      setUserInfo(params);
       getMyAppointmentList(params)
         .then(res => {
           setGetAppointmentList(res.data.data.appointmentList);
@@ -44,8 +44,9 @@ function AppointmentConfirm() {
 
       {isActive ? (
         <AppointmentList
-          enteredData={enteredData}
+          userInfo={userInfo}
           appointmentList={getAppointmentList}
+          setAppointmentList={setGetAppointmentList}
         />
       ) : (
         <form onSubmit={onHandleSubmit}>

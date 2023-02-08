@@ -18,12 +18,24 @@ const ALERT_DATA = {
   btnContent: '예약하기',
 };
 
+const ALERT_CHANGE_DATA = {
+  subTit: '아래의 정보로',
+  tit: '예약변경하시겠습니까?',
+  btnContent: '예약변경',
+};
+
 function AppointmentForm() {
   const nameRef = useRef();
   const phoneRef = useRef();
-
   const location = useLocation();
 
+  const userInfo = location.state.prevParams?.userInfo;
+  const prevAppointmentInfo = location.state.prevParams?.prevAppointmentInfo;
+
+  const [changeAppointmentInfo, setChangeAppointmentInfo] = useState({
+    appointmentType: 'CALL',
+    numberOfPeople: 1,
+  });
   const [openAlert, setOpenAlert] = useState(false);
   const [appointmentInfo, setAppointmentInfo] = useState({
     name: '',
@@ -37,11 +49,18 @@ function AppointmentForm() {
   });
 
   useEffect(() => {
-    setAppointmentInfo({
-      ...appointmentInfo,
-      appointmentDate: location.state.date,
-      appointmentHour: location.state.time,
-    });
+    if (location.state.newParams)
+      setChangeAppointmentInfo({
+        ...changeAppointmentInfo,
+        appointmentDate: location.state.newParams.date,
+        appointmentHour: location.state.newParams.time,
+      });
+    if (location.state.date)
+      setAppointmentInfo({
+        ...appointmentInfo,
+        appointmentDate: location.state.date,
+        appointmentHour: location.state.time,
+      });
   }, []);
 
   const inputChangeHandler = e => {
@@ -55,10 +74,23 @@ function AppointmentForm() {
 
   const clickKindBtnHandler = e => {
     setAppointmentInfo({ ...appointmentInfo, appointmentType: e.target.name });
+    if (userInfo)
+      setChangeAppointmentInfo({
+        ...changeAppointmentInfo,
+        appointmentType: e.target.name,
+      });
   };
 
   const peopleChangeHandler = e => {
-    setAppointmentInfo({ ...appointmentInfo, numberOfPeople: e.target.value });
+    setAppointmentInfo({
+      ...appointmentInfo,
+      numberOfPeople: Number(e.target.value),
+    });
+    if (userInfo)
+      setChangeAppointmentInfo({
+        ...changeAppointmentInfo,
+        numberOfPeople: Number(e.target.value),
+      });
   };
 
   const termClickHandler = e => {
@@ -76,29 +108,67 @@ function AppointmentForm() {
       });
   };
 
+  const isChangeAppointment = key => {
+    let answer = false;
+    if (prevAppointmentInfo[key] === appointmentInfo[key]) {
+      if (key === 'appointmentType')
+        setChangeAppointmentInfo(current => {
+          const { appointmentType, ...rest } = current;
+          return rest;
+        });
+      if (key === 'numberOfPeople')
+        setChangeAppointmentInfo(current => {
+          const { numberOfPeople, ...rest } = current;
+          return rest;
+        });
+      answer = true;
+    }
+    return answer;
+  };
+
   const submitHandler = e => {
     e.preventDefault();
+
+    let allCheck = false;
+
     if (
       appointmentInfo.personalInformationCollectionAndUsageAgreement &&
       appointmentInfo.privacyPolicyRead
-    )
-      setOpenAlert(true);
-    else toast.error('필수 동의를 체크해주세요.');
+    ) {
+      if (!userInfo) setOpenAlert(true);
+      else allCheck = true;
+    } else {
+      toast.error('필수 동의를 체크해주세요.');
+      allCheck = false;
+    }
+
+    if (allCheck && userInfo) {
+      if (
+        isChangeAppointment('appointmentType') &&
+        isChangeAppointment('numberOfPeople') &&
+        Object.keys(changeAppointmentInfo).length === 0
+      )
+        toast.error('기존 예약과 같습니다');
+      else setOpenAlert(true);
+    }
   };
 
   return (
     <>
       {openAlert && (
         <ConfirmAlert
-          page='create'
-          info={ALERT_DATA}
-          appointmentInfo={appointmentInfo}
+          page={userInfo ? 'change' : 'create'}
+          alertInfo={userInfo ? ALERT_CHANGE_DATA : ALERT_DATA}
+          userInfo={userInfo}
+          appointmentInfo={userInfo ? prevAppointmentInfo : appointmentInfo}
+          changeAppointmentInfo={userInfo && changeAppointmentInfo}
+          appointmentCode={userInfo && prevAppointmentInfo.appointmentCode}
           setOpenAlert={setOpenAlert}
         />
       )}
       <div className={cx('wrap')}>
         <Pagination pageNum={2} />
-        <Title name='예약하기' />
+        <Title name={userInfo ? '예약변경' : '예약하기'} />
         <form onSubmit={submitHandler}>
           <div className={cx('name-wrap', 'input-wrap')}>
             <label htmlFor='name' className={cx('left')}>
@@ -107,9 +177,11 @@ function AppointmentForm() {
             <input
               type='text'
               id='name'
+              placeholder={userInfo?.name}
               className={cx('right', 'input')}
               ref={nameRef}
               onChange={inputChangeHandler}
+              disabled={userInfo}
               required
             />
           </div>
@@ -120,10 +192,11 @@ function AppointmentForm() {
             <input
               type='tel'
               id='phone'
-              placeholder='ex) 010-1234-5678'
+              placeholder={userInfo ? userInfo.phone : 'ex) 010-1234-5678'}
               className={cx('right', 'input')}
               ref={phoneRef}
               onChange={inputChangeHandler}
+              disabled={userInfo}
               pattern='^\d{3}-\d{3,4}-\d{4}$'
               title='ex) 010-1234-5678'
               required
@@ -209,7 +282,7 @@ function AppointmentForm() {
             </div>
           </div>
           <button type='submit' className={cx('submit-btn')}>
-            예약확정
+            {userInfo ? '예약변경' : '예약확정'}
           </button>
         </form>
       </div>

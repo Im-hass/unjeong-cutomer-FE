@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
-import AppointmentItem from '../ui/AppointmentItem';
 
 import styles from './appointmentList.module.scss';
+import { getMyAppointmentList } from '../../store/api/appointment';
+import AppointmentItem from '../ui/AppointmentItem';
 import ConfirmAlert from '../common/ConfirmAlert';
 
 const cx = classNames.bind(styles);
@@ -12,17 +13,30 @@ const ALERT_DATA = {
   btnContent: '예약변경',
 };
 
-function AppointmentList({ enteredData, appointmentList }) {
+const ALERT_DATA2 = {
+  subTit: '아래의 예약을',
+  tit: '취소하시겠습니까?',
+  btnContent: '예약취소',
+};
+
+function AppointmentList({ userInfo, appointmentList, setAppointmentList }) {
   const [openAlert, setOpenAlert] = useState(false);
   const [clickAppointment, setClickAppointment] = useState();
+  const [prevPage, setPrevPage] = useState('changeConfirm');
+
+  useEffect(() => {
+    getMyAppointmentList(userInfo).then(res => {
+      setAppointmentList(res.data.data.appointmentList);
+    });
+  }, [openAlert]);
 
   return (
     <>
       {openAlert && (
         <ConfirmAlert
-          page='change'
-          info={ALERT_DATA}
-          enteredData={enteredData}
+          page={prevPage}
+          alertInfo={prevPage === 'changeConfirm' ? ALERT_DATA : ALERT_DATA2}
+          userInfo={userInfo}
           setOpenAlert={setOpenAlert}
           appointmentInfo={clickAppointment}
         />
@@ -31,7 +45,7 @@ function AppointmentList({ enteredData, appointmentList }) {
       <div className={cx('appointmentList-wrap')}>
         <div className={cx('info-wrap')}>
           <div className={cx('name-wrap')}>
-            <span className={cx('name')}>{enteredData.name}</span>
+            <span className={cx('name')}>🌟 {userInfo.name}</span>
             <span>님의 예약정보</span>
           </div>
           <ul className={cx('types')}>
@@ -39,7 +53,9 @@ function AppointmentList({ enteredData, appointmentList }) {
             <li className={cx('cancelled')}>예약취소됨</li>
             <li className={cx('completed')}>상담완료</li>
           </ul>
-          <div>※ 예약변경/취소는 상담대기중인 경우에만 가능합니다</div>
+          <div className={cx('info')}>
+            ※ 예약변경/취소는 상담대기중인 경우에만 가능합니다
+          </div>
         </div>
 
         <ul className={cx('items-wrap')}>
@@ -49,6 +65,7 @@ function AppointmentList({ enteredData, appointmentList }) {
               list={list}
               setOpenAlert={setOpenAlert}
               setClickAppointment={setClickAppointment}
+              setPrevPage={setPrevPage}
             />
           ))}
         </ul>

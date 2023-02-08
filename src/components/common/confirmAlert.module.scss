@@ -46,6 +46,14 @@
         align-items: center;
         padding: 7px 10px;
 
+        &.changed {
+          background-color: #fff9cb;
+
+          dd {
+            font-weight: 600;
+          }
+        }
+
         &~.content-li {
           border-top: 1.5px solid #fff;
         }

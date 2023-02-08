@@ -1,34 +1,85 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import classNames from 'classnames/bind';
 
 import styles from './confirmAlert.module.scss';
-import { addAppointment } from '../../store/api/appointment';
+import {
+  addAppointment,
+  cancelAppointment,
+  changeAppointment,
+} from '../../store/api/appointment';
 
 const cx = classNames.bind(styles);
 
 function ConfirmAlert({
   page,
-  info,
+  alertInfo,
+  userInfo,
   appointmentInfo,
-  enteredData,
+  changeAppointmentInfo,
   setOpenAlert,
+  appointmentCode,
 }) {
   const navigate = useNavigate();
+  const [appointmentType, setAppointmentType] = useState();
+
+  useEffect(() => {
+    if (changeAppointmentInfo?.appointmentType) {
+      setAppointmentType(changeAppointmentInfo.appointmentType);
+    } else {
+      setAppointmentType(appointmentInfo.appointmentType);
+    }
+  }, []);
 
   const clickCancelBtnHandler = () => {
     setOpenAlert(false);
   };
+
   const submitHandler = () => {
-    addAppointment(appointmentInfo)
-      .then(() => {
-        navigate('/appointmentDone', { state: appointmentInfo });
-      })
-      .catch(err => {
-        toast.error(err.response.data.errorMessage);
-        navigate('/appointment');
-      });
+    if (page === 'create') {
+      addAppointment(appointmentInfo)
+        .then(() => {
+          navigate('/appointmentDone', { state: appointmentInfo });
+        })
+        .catch(err => {
+          toast.error(err.response.data.errorMessage);
+        });
+    }
+    if (page === 'changeConfirm') {
+      const params = {
+        userInfo,
+        appointmentInfo,
+      };
+      navigate('/appointment', { state: params });
+    }
+
+    if (page === 'change') {
+      const params = {
+        page: 'change',
+        userInfo,
+        appointmentInfo,
+        changeAppointmentInfo,
+      };
+      changeAppointment(appointmentCode, changeAppointmentInfo)
+        .then(() => {
+          navigate('/appointmentDone', { state: params });
+        })
+        .catch(err => {
+          toast.error(err.response.data.errorMessage);
+        });
+    }
+
+    if (page === 'cancel') {
+      cancelAppointment(appointmentInfo.appointmentCode)
+        .then(() => {
+          toast.success('예약취소 되었습니다.');
+          setOpenAlert(false);
+        })
+        .catch(err => {
+          toast.error(err.response.data.errorMessage);
+        });
+    }
   };
 
   return (
@@ -36,40 +87,62 @@ function ConfirmAlert({
       <div className={cx('backdrop')} />
       <div className={cx('modal-wrap')}>
         <h2>
-          {info.subTit} <br />
-          <strong>{info.tit}</strong>
+          {alertInfo.subTit} <br />
+          <strong>{alertInfo.tit}</strong>
         </h2>
         <div className={cx('content-wrap')}>
           <dl>
             <div className={cx('content-li')}>
               <dt>이름</dt>
               <dd>
-                {page === 'create' ? appointmentInfo.name : enteredData.name}
+                {page === 'create' ? appointmentInfo.name : userInfo.name}
               </dd>
             </div>
             <div className={cx('content-li')}>
               <dt>연락처</dt>
               <dd>
-                {page === 'create' ? appointmentInfo.phone : enteredData.phone}
+                {page === 'create' ? appointmentInfo.phone : userInfo.phone}
               </dd>
             </div>
-            <div className={cx('content-li')}>
+            <div
+              className={cx(
+                'content-li',
+                changeAppointmentInfo?.appointmentType ? 'changed' : '',
+              )}
+            >
               <dt>상담종류</dt>
+              <dd>{appointmentType === 'CALL' ? '전화상담' : '방문상담'}</dd>
+            </div>
+            <div
+              className={cx(
+                'content-li',
+                changeAppointmentInfo?.numberOfPeople ? 'changed' : '',
+              )}
+            >
+              <dt>상담인원</dt>
               <dd>
-                {appointmentInfo.appointmentType === 'CALL'
-                  ? '전화상담'
-                  : '방문상담'}
+                {changeAppointmentInfo?.numberOfPeople
+                  ? changeAppointmentInfo.numberOfPeople
+                  : appointmentInfo.numberOfPeople}
+                명
               </dd>
             </div>
-            <div className={cx('content-li')}>
-              <dt>상담인원</dt>
-              <dd>{appointmentInfo.numberOfPeople}명</dd>
-            </div>
-            <div className={cx('content-li')}>
+            <div
+              className={cx(
+                'content-li',
+                changeAppointmentInfo?.appointmentDate ? 'changed' : '',
+              )}
+            >
               <dt>상담날짜</dt>
               <dd>
-                {appointmentInfo.appointmentDate} /{' '}
-                {appointmentInfo.appointmentHour}:00
+                {changeAppointmentInfo?.appointmentDate
+                  ? changeAppointmentInfo.appointmentDate
+                  : appointmentInfo.appointmentDate}{' '}
+                /{' '}
+                {changeAppointmentInfo?.appointmentHour
+                  ? changeAppointmentInfo.appointmentHour
+                  : appointmentInfo.appointmentHour}
+                :00
               </dd>
             </div>
           </dl>
@@ -80,7 +153,7 @@ function ConfirmAlert({
             className={cx('submit-btn')}
             onClick={submitHandler}
           >
-            {info.btnContent}
+            {alertInfo.btnContent}
           </button>
           <button
             type='button'

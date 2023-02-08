@@ -26,6 +26,10 @@
         font-size: 0.9rem;
         color: rgba(#8B8585, 0.7);
       }
+
+      &:disabled {
+        background-color: #ddd;
+      }
     }
 
     .input-wrap {
