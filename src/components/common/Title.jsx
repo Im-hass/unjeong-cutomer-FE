@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import classNames from 'classnames/bind';
 
 import styles from './title.module.scss';
