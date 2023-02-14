@@ -12,6 +12,7 @@ function InfoTxt({
   viewBox,
   productInfo = true,
   productName,
+  address,
   txt,
   unit,
 }) {
@@ -22,9 +23,12 @@ function InfoTxt({
         {productName === '타로' && <span className={cx('desc')}>셔플당</span>}
         {productName === '운영시간' && <span className={cx('desc')}>매일</span>}
         {productName === '위치' && (
-          <span className={cx('desc')}>부산 금정구 금정로52번길 46</span>
+          <span className={cx('desc')}>{address}</span>
         )}
         <span className={cx('txt')}>{txt}</span>
+        {productName === '운영시간' && (
+          <span className={cx('desc')}> * 일요일 휴무</span>
+        )}
         {unit && <span className={cx('unit')}>{unit}</span>}
       </div>
     </div>

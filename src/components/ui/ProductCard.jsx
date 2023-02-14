@@ -28,7 +28,7 @@ function ProductCard({ imgUrl, productName, tags, price, time }) {
           w={23}
           h={23}
           viewBox='0 0 14 14'
-          productName='사주'
+          productName={productName}
           txt={price}
           unit='원'
         />
@@ -38,7 +38,6 @@ function ProductCard({ imgUrl, productName, tags, price, time }) {
           w={23}
           h={23}
           viewBox='0 0 14 14'
-          productName='사주'
           txt={time}
           unit='분'
         />
