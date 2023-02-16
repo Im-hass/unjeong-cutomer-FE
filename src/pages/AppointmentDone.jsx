@@ -1,12 +1,12 @@
+/* eslint-disable react/no-array-index-key */
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
 import styles from './appointmentDone.module.scss';
 import Pagination from '../components/common/Pagination';
-import ShareIcon from '../assets/img/share-icon.png';
-import KakaoIcon from '../assets/img/kakao-icon.png';
-import FacebookIcon from '../assets/img/facebook-icon.png';
+import ShareBtn from '../components/ui/ShareBtn';
+import { SHARE_BTN_DATA } from '../assets/data/ShareBtnData';
 
 const cx = classNames.bind(styles);
 
@@ -99,18 +99,9 @@ function AppointmentDone() {
           <div className={cx('share-wrap')}>
             <h3>공유하기</h3>
             <div className={cx('share-btn-wrap')}>
-              <button type='button'>
-                <img src={ShareIcon} alt='공유하기' />
-                <span>URL</span>
-              </button>
-              <button type='button'>
-                <img src={KakaoIcon} alt='카카오톡 공유하기' />
-                <span>카카오톡</span>
-              </button>
-              <button type='button'>
-                <img src={FacebookIcon} alt='페이스북 공유하기' />
-                <span>페이스북</span>
-              </button>
+              {SHARE_BTN_DATA.map((share, i) => (
+                <ShareBtn key={`share-${i}`} data={share} />
+              ))}
             </div>
           </div>
         </>

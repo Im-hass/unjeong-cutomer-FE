@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import classNames from 'classnames/bind';
@@ -32,11 +32,11 @@ function ConfirmAlert({
     }
   }, []);
 
-  const clickCancelBtnHandler = () => {
+  const clickCancelBtnHandler = useCallback(() => {
     setOpenAlert(false);
-  };
+  }, [setOpenAlert]);
 
-  const submitHandler = () => {
+  const submitHandler = useCallback(() => {
     if (page === 'create') {
       addAppointment(appointmentInfo)
         .then(() => {
@@ -80,7 +80,7 @@ function ConfirmAlert({
           toast.error(err.response.data.errorMessage);
         });
     }
-  };
+  }, [page, appointmentInfo]);
 
   return (
     <>

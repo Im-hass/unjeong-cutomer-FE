@@ -9,10 +9,10 @@ import Main from './pages/Main';
 import AppointmentDate from './pages/AppointmentDate';
 import AppointmentForm from './pages/AppointmentForm';
 import AppointmentDone from './pages/AppointmentDone';
+import AppointmentHistory from './pages/AppointmentHistory';
 import StoreInfo from './components/content/StoreInfo';
 import ProductInfo from './components/content/ProductInfo';
 import StoreLocation from './components/content/StoreLocation';
-import AppointmentHistory from './pages/AppointmentHistory';
 import AppointmentConfirm from './components/content/AppointmentConfirm';
 
 function App() {
@@ -20,7 +20,6 @@ function App() {
     <div className='wrap'>
       <div className='top'>
         <Header />
-        {/* <Nav /> */}
       </div>
       <div className='container-wrap'>
         <Routes>
@@ -34,8 +33,6 @@ function App() {
           <Route path='appointmentDone' element={<AppointmentDone />} />
           <Route path='appointmentConfirm' element={<AppointmentHistory />}>
             <Route index element={<AppointmentConfirm />} />
-            {/* <Route path='change' element={<AppointmentChange />} />
-            <Route path='cancel' element={<StoreLocationCancel />} /> */}
           </Route>
         </Routes>
       </div>

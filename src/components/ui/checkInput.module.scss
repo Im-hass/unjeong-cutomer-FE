@@ -1,0 +1,39 @@
+.checkbox-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+
+  .check-wrap {
+    position: relative;
+    margin: 3px 8px 0 0;
+
+    input[type='checkbox'] {
+      -webkit-appearance: none;
+      width: 15px;
+      height: 15px;
+      border: 1px solid #ccc;
+      border-radius: 2px;
+      background-color: #fff;
+
+      &:checked {
+        border: none;
+        background-color: #CF8BFC;
+      }
+    }
+
+    .icon {
+      position: absolute;
+      top: 2px;
+      left: 3px;
+      width: 10px;
+      fill: #fff;
+      pointer-events: none;
+    }
+  }
+
+  label {
+    font-size: 0.89rem;
+    color: #888;
+  }
+}
