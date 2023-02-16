@@ -1,6 +1,7 @@
 FROM node:alpine
 
 ENV TZ Asia/Seoul
+ENV REACT_APP_BASEURL unjeong:12230
 
 WORKDIR /app
 
