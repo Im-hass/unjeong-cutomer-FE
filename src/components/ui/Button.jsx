@@ -5,10 +5,10 @@ import styles from './button.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Button() {
+function Button({ content }) {
   return (
-    <button type='button' className={cx('button')}>
-      다음으로
+    <button type='submit' className={cx('button')}>
+      {content}
     </button>
   );
 }

@@ -1,0 +1,37 @@
+.date-wrap {
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: -1px;
+    width: 110px;
+    height: 35px;
+    background-color: #fff;
+    border: 1px solid #cccccc;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #666;
+    transition: 0.2s all;
+
+    span {
+      margin: 3px 0 0 2px;
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: #777;
+    }
+
+    &.active {
+      background-color: #FDDC3F;
+      border: none;
+      font-weight: 600;
+    }
+
+    &.disable {
+      background-color: #bbb;
+    }
+  }
+
+  &:first-child button {
+    margin-left: 1px;
+  }
+}
