@@ -28,7 +28,6 @@ function useTransformDate() {
     }
     setSevenDayArr(tmpDateArr);
   }, [TODAY]);
-  // console.log('커스텀훅', sevenDayArr);
 
   return [sevenDayArr];
 }
