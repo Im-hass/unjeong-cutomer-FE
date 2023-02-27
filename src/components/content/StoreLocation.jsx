@@ -4,8 +4,8 @@ import styles from './storeLocation.module.scss';
 import Title from '../common/Title';
 import InfoTxt from '../ui/InfoTxt';
 import { SpotIcon, TimeIcon } from '../../assets/svg/index';
-import temp from '../../assets/img/1000x1000.png';
 import { getStoreInfo } from '../../store/api/storeInfo';
+import { STORE_MAP_IMG } from '../../assets/data/StoreImgData';
 
 const cx = classNames.bind(styles);
 
@@ -26,7 +26,9 @@ function StoreLocation() {
 
       <div className={cx('storeLocation-wrap')}>
         <div className={cx('img-wrap')}>
-          <img src={temp} alt='1000x1000' />
+          {STORE_MAP_IMG && (
+            <img src={STORE_MAP_IMG.url} alt={STORE_MAP_IMG.alt} />
+          )}
         </div>
 
         {datas && (

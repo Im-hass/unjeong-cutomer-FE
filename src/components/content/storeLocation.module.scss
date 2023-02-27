@@ -1,8 +1,12 @@
 .storeLocation-wrap {
+  display: flex;
+  flex-direction: column;
+
   .img-wrap {
     width: 100%;
-    max-width: 400px;
+    max-width: 800px;
     margin-bottom: 20px;
+    align-self: center;
 
     img {
       max-width: 100%;
