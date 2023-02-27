@@ -15,7 +15,6 @@ function StoreLocation() {
   useEffect(() => {
     if (datas === null) {
       getStoreInfo().then(res => {
-        console.log(res);
         setDatas(res.data);
       });
     }
@@ -40,6 +39,7 @@ function StoreLocation() {
               productInfo={false}
               productName='운영시간'
               txt={`${datas.openingHour}:00 ~ ${datas.closingHour}:00`}
+              shopclosingDay={datas.shopClosingDayOfWeek}
             />
 
             <InfoTxt
