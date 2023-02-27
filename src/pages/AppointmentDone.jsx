@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import classNames from 'classnames/bind';
+import toast from 'react-hot-toast';
 
 import styles from './appointmentDone.module.scss';
 import Pagination from '../components/common/Pagination';
@@ -19,6 +20,28 @@ function AppointmentDone() {
   const appointmentType = location.state.changeAppointmentInfo
     ? location.state.changeAppointmentInfo.appointmentType
     : location.state.appointmentType;
+
+  const handleCopyClipBoard = async text => {
+    try {
+      await navigator.clipboard.writeText(text);
+      toast('클립보드로 복사되었습니다!', {
+        icon: '📋',
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const handleShare = e => {
+    const { alt } = e.target;
+    if (alt === '공유하기') {
+      handleCopyClipBoard(window.location.href);
+    } else if (alt === '카카오톡 공유하기') {
+      console.log('카카오톡 공유하기');
+    } else if (alt === '페이스북 공유하기') {
+      console.log('페이스북 공유하기');
+    }
+  };
 
   useEffect(() => {
     setIsFetching(false);
@@ -100,7 +123,11 @@ function AppointmentDone() {
             <h3>공유하기</h3>
             <div className={cx('share-btn-wrap')}>
               {SHARE_BTN_DATA.map((share, i) => (
-                <ShareBtn key={`share-${i}`} data={share} />
+                <ShareBtn
+                  key={`share-${i}`}
+                  data={share}
+                  handleShare={handleShare}
+                />
               ))}
             </div>
           </div>
