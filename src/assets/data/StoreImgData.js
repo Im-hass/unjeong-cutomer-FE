@@ -18,3 +18,10 @@ export const STORE_IMG_LIST = [
     desc: '가게 내부',
   },
 ];
+
+export const STORE_MAP_IMG = {
+  id: 1,
+  url: `${process.env.REACT_APP_BASEURL}/api/static/img/store_4`,
+  alt: '가게 위치 이미지',
+  desc: '가게 위치 이미지',
+};

@@ -46,6 +46,11 @@ function AppointmentDate() {
           setAvailableTimeArr(res.data.data);
         })
         .catch(err => console.log(err));
+    } else if (clickDateBtn === '' && sevenDayArr !== undefined) {
+      if (sevenDayArr[0] !== undefined) {
+        setClickDateBtnDay(`${sevenDayArr[0][1]} ${sevenDayArr[0][2]}`);
+        setClickDateBtn(`${sevenDayArr[0][0]}-${sevenDayArr[0][1]}`);
+      }
     }
     setIsLoading(false);
   }, [clickDateBtn, sevenDayArr]);
