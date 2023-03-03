@@ -92,12 +92,14 @@ function AppointmentForm() {
       }
 
       if (allCheck && userInfo) {
-        if (
+        isChangeAppointment('appointmentType');
+        isChangeAppointment('numberOfPeople');
+        const isTrue =
           isChangeAppointment('appointmentType') &&
           isChangeAppointment('numberOfPeople') &&
-          Object.keys(changeAppointmentInfo).length === 0
-        )
-          toast.error('기존 예약과 같습니다');
+          !Object.keys(changeAppointmentInfo).includes('appointmentDate') &&
+          !Object.keys(changeAppointmentInfo).includes('appointmentHour');
+        if (isTrue) toast.error('기존 예약과 같습니다');
         else setOpenAlert(true);
       }
     },

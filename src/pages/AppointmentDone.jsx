@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable react/no-array-index-key */
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -19,6 +20,8 @@ function AppointmentDone() {
   const changeInfo = location.state.changeAppointmentInfo || null;
   const appointmentType = location.state.changeAppointmentInfo
     ? location.state.changeAppointmentInfo.appointmentType
+      ? location.state.changeAppointmentInfo.appointmentType
+      : location.state.appointmentInfo.appointmentType
     : location.state.appointmentType;
 
   const handleCopyClipBoard = async text => {
