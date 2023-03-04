@@ -1,0 +1,43 @@
+.detailPolicy-wrap {
+    width: 100vw;
+    height: calc(100vh - 20px);
+    padding: 20px;
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+}
+
+.header-wrap {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    .title {
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    .btn {
+        padding: 5px 20px;
+        color: #666666;
+        font-weight: bold;
+        font-size: 1rem;
+        border-radius: 5px;
+        background-color: #FDDC3F;
+    }
+}
+
+.markdownViewer-wrap {
+    width: 100%;
+    height: calc(100% - 20px);
+
+    .w-md-editor-text-pre > code,
+    .w-md-editor-text-input {
+        font-size: 23px !important;
+        line-height: 24px !important;
+    }
+}

@@ -16,8 +16,8 @@ import {
   SelectBox,
   KindBtn,
 } from '../components/ui/index';
-import { getPolicyKeyList } from '../store/api/appointment';
 import DetailPolicy from '../components/content/DetailPolicy';
+import { getPolicyKeyList } from '../store/api/policy';
 
 const cx = classNames.bind(styles);
 
