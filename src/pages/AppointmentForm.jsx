@@ -16,6 +16,7 @@ import {
   SelectBox,
   KindBtn,
 } from '../components/ui/index';
+import DetailPolicy from '../components/content/DetailPolicy';
 
 const cx = classNames.bind(styles);
 
@@ -30,6 +31,18 @@ function AppointmentForm() {
     numberOfPeople: 1,
   });
   const [openAlert, setOpenAlert] = useState(false);
+  const [openPolicy, setOpenPolicy] = useState(false);
+  const [policyKeyList] = useState([
+    {
+      index: 0,
+      key: '개인정보 수집 및 이용 동의',
+    },
+    {
+      index: 1,
+      key: '개인정보 처리방침 읽음 여부',
+    },
+  ]);
+  const [selectPolicy, setSelectPolicy] = useState();
   const [appointmentInfo, setAppointmentInfo] = useState({
     name: '',
     phone: '',
@@ -106,6 +119,12 @@ function AppointmentForm() {
     [appointmentInfo, changeAppointmentInfo, openAlert],
   );
 
+  const handleDetailPolicy = labelContent => {
+    console.log(labelContent);
+    setOpenPolicy(true);
+    setSelectPolicy(labelContent);
+  };
+
   return (
     <>
       {openAlert && (
@@ -117,6 +136,12 @@ function AppointmentForm() {
           changeAppointmentInfo={userInfo && changeAppointmentInfo}
           appointmentCode={userInfo && prevAppointmentInfo.appointmentCode}
           setOpenAlert={setOpenAlert}
+        />
+      )}
+      {openPolicy && (
+        <DetailPolicy
+          selectPolicy={selectPolicy}
+          setOpenPolicy={setOpenPolicy}
         />
       )}
       <div className={cx('wrap')}>
@@ -170,22 +195,29 @@ function AppointmentForm() {
             setChangeAppointmentInfo={setChangeAppointmentInfo}
           />
           <div className={cx('terms-wrap')}>
-            <TermsInputBtn
-              inputId='term1'
-              defaultCheck={
-                appointmentInfo.personalInformationCollectionAndUsageAgreement
-              }
-              labelContent='개인정보 수집 및 이용 동의'
-              appointmentInfo={appointmentInfo}
-              setAppointmentInfo={setAppointmentInfo}
-            />
-            <TermsInputBtn
-              inputId='term2'
-              defaultCheck={appointmentInfo.privacyPolicyRead}
-              labelContent='개인정보 처리방침 읽음 여부'
-              appointmentInfo={appointmentInfo}
-              setAppointmentInfo={setAppointmentInfo}
-            />
+            {policyKeyList && (
+              <>
+                <TermsInputBtn
+                  inputId='term1'
+                  defaultCheck={
+                    appointmentInfo.personalInformationCollectionAndUsageAgreement
+                  }
+                  labelContent={policyKeyList[0].key}
+                  appointmentInfo={appointmentInfo}
+                  setAppointmentInfo={setAppointmentInfo}
+                  handleDetailPolicy={handleDetailPolicy}
+                />
+
+                <TermsInputBtn
+                  inputId='term2'
+                  defaultCheck={appointmentInfo.privacyPolicyRead}
+                  labelContent={policyKeyList[1].key}
+                  appointmentInfo={appointmentInfo}
+                  setAppointmentInfo={setAppointmentInfo}
+                  handleDetailPolicy={handleDetailPolicy}
+                />
+              </>
+            )}
           </div>
           <Button content={userInfo ? '예약변경' : '예약확정'} />
         </form>

@@ -12,6 +12,7 @@ function TermsInputBtn({
   labelContent,
   appointmentInfo,
   setAppointmentInfo,
+  handleDetailPolicy,
 }) {
   const termClickHandler = useCallback(
     e => {
@@ -47,7 +48,14 @@ function TermsInputBtn({
           <span>(필수)</span> {labelContent}
         </label>
       </div>
-      <button type='button'>상세</button>
+      <button
+        type='button'
+        onClick={() => {
+          handleDetailPolicy(labelContent);
+        }}
+      >
+        상세
+      </button>
     </div>
   );
 }
