@@ -19,7 +19,9 @@ function UserInfoInput({
     const inputValue = inputRef.current.value;
     if (inputId === 'name')
       setAppointmentInfo({ ...appointmentInfo, name: inputValue });
-    else setAppointmentInfo({ ...appointmentInfo, phone: inputValue });
+    else if (inputId === 'phone')
+      setAppointmentInfo({ ...appointmentInfo, phone: inputValue });
+    else setAppointmentInfo(inputValue);
   }, [inputId, appointmentInfo]);
 
   return (

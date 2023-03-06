@@ -5,33 +5,45 @@ import toast from 'react-hot-toast';
 import styles from '../../pages/appointmentForm.module.scss';
 import { getMyAppointmentList } from '../../store/api/appointment';
 import Title from '../common/Title';
-import { Button, UserInfoInput } from '../ui/index';
+import { Button } from '../ui/index';
 import AppointmentList from './AppointmentList';
+import AppointmentConfirmToggle from '../ui/AppointmentConfirmToggle';
+import NameConfirmWrap from './NameConfirmWrap';
+import AppointmentNumberConfirmWrap from './AppointmentNumberConfirmWrap';
 
 const cx = classNames.bind(styles);
 
 function AppointmentConfirm() {
   const [isActive, setIsActive] = useState(false);
   const [userInfo, setUserInfo] = useState();
+  const [userAppointmentNumber, setUserAppointmentNumber] = useState('');
   const [getAppointmentList, setGetAppointmentList] = useState();
+  const [clickToggle, setClickToggle] = useState('name');
 
   const onHandleSubmit = e => {
     e.preventDefault();
-    if (userInfo.name !== '' && userInfo.phone !== '') {
-      setUserInfo(userInfo);
-      getMyAppointmentList(userInfo)
-        .then(res => {
-          setGetAppointmentList(res.data.data.appointmentList);
-          setIsActive(true);
-        })
-        .catch(err => toast.error(err.response.data.errorMessage));
+    if (clickToggle === 'name') {
+      if (userInfo.name !== '' && userInfo.phone !== '') {
+        setUserInfo(userInfo);
+        getMyAppointmentList(userInfo)
+          .then(res => {
+            setGetAppointmentList(res.data.data.appointmentList);
+            setIsActive(true);
+          })
+          .catch(err => toast.error(err.response.data.errorMessage));
+      }
+    } else {
+      console.log(userAppointmentNumber);
     }
   };
 
   return (
     <div className={cx('wrap')}>
       <Title name='예약확인' />
-
+      <AppointmentConfirmToggle
+        clickToggle={clickToggle}
+        setClickToggle={setClickToggle}
+      />
       {isActive ? (
         <AppointmentList
           userInfo={userInfo}
@@ -40,20 +52,14 @@ function AppointmentConfirm() {
         />
       ) : (
         <form onSubmit={onHandleSubmit}>
-          <UserInfoInput
-            inputType='text'
-            inputId='name'
-            labelContent='이름'
-            appointmentInfo={userInfo}
-            setAppointmentInfo={setUserInfo}
-          />
-          <UserInfoInput
-            inputType='tel'
-            inputId='phone'
-            labelContent='연락처'
-            appointmentInfo={userInfo}
-            setAppointmentInfo={setUserInfo}
-          />
+          {clickToggle === 'name' ? (
+            <NameConfirmWrap userInfo={userInfo} setUserInfo={setUserInfo} />
+          ) : (
+            <AppointmentNumberConfirmWrap
+              userInfo={userAppointmentNumber}
+              setUserInfo={setUserAppointmentNumber}
+            />
+          )}
           <Button content='예약조회' />
         </form>
       )}
