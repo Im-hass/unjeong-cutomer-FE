@@ -17,7 +17,6 @@ import {
   KindBtn,
 } from '../components/ui/index';
 import DetailPolicy from '../components/content/DetailPolicy';
-import { getPolicyKeyList } from '../store/api/policy';
 
 const cx = classNames.bind(styles);
 
@@ -33,7 +32,16 @@ function AppointmentForm() {
   });
   const [openAlert, setOpenAlert] = useState(false);
   const [openPolicy, setOpenPolicy] = useState(false);
-  const [policyKeyList, setPolicyKeyList] = useState(null);
+  const [policyKeyList] = useState([
+    {
+      index: 0,
+      key: '개인정보 수집 및 이용 동의',
+    },
+    {
+      index: 1,
+      key: '개인정보 처리방침 읽음 여부',
+    },
+  ]);
   const [selectPolicy, setSelectPolicy] = useState();
   const [appointmentInfo, setAppointmentInfo] = useState({
     name: '',
@@ -59,39 +67,6 @@ function AppointmentForm() {
         appointmentDate: location.state.date,
         appointmentHour: location.state.time,
       });
-    if (policyKeyList == null) {
-      setPolicyKeyList([
-        {
-          index: 0,
-          key: 'personal_info',
-          contents: 'asdasdasdasdasda231321321sdsadasdasdsad',
-        },
-        {
-          index: 1,
-          key: 'privacy',
-          contents: '안농 ㅋ',
-        },
-      ]);
-      // getPolicyKeyList()
-      //   .then(res => {
-      //     console.log(res);
-      //     setPolicyKeyList([
-      //       {
-      //         index: 0,
-      //         key: 'personal_info',
-      //         contents: 'asdasdasdasdasda231321321sdsadasdasdsad',
-      //       },
-      //       {
-      //         index: 1,
-      //         key: 'privacy',
-      //         contents: '안농 ㅋ',
-      //       },
-      //     ]);
-      //   })
-      //   .catch(err => {
-      //     console.log(err);
-      //   });
-    }
   }, []);
 
   const isChangeAppointment = key => {
@@ -243,25 +218,6 @@ function AppointmentForm() {
                 />
               </>
             )}
-
-            {/* <TermsInputBtn
-              inputId='term1'
-              defaultCheck={
-                appointmentInfo.personalInformationCollectionAndUsageAgreement
-              }
-              labelContent='개인정보 수집 및 이용 동의'
-              appointmentInfo={appointmentInfo}
-              setAppointmentInfo={setAppointmentInfo}
-              handleDetailPolicy={handleDetailPolicy}
-            />
-            <TermsInputBtn
-              inputId='term2'
-              defaultCheck={appointmentInfo.privacyPolicyRead}
-              labelContent='개인정보 처리방침 읽음 여부'
-              appointmentInfo={appointmentInfo}
-              setAppointmentInfo={setAppointmentInfo}
-              handleDetailPolicy={handleDetailPolicy}
-            /> */}
           </div>
           <Button content={userInfo ? '예약변경' : '예약확정'} />
         </form>

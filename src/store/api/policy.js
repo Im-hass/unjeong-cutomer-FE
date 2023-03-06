@@ -1,6 +1,6 @@
 import { basicRequest } from './base';
 
-const SERVICE = '/api/customer/policy';
+const SERVICE = '/api/static';
 
 export const getPolicyKeyList = async () => {
   const res = await basicRequest.get(`${SERVICE}/policy/keys`);
