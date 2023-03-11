@@ -13,6 +13,11 @@ export const addAppointment = async data => {
   return res;
 };
 
+export const getViewAppointment = async code => {
+  const res = await basicRequest.get(`${SERVICE}/view/${code}`);
+  return res;
+};
+
 export const getMyAppointmentList = async data => {
   const res = await basicRequest.post(`${SERVICE}/my`, data);
   return res;

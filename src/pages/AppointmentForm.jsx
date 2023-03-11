@@ -132,7 +132,7 @@ function AppointmentForm() {
             setAppointmentInfo={setAppointmentInfo}
           />
           <UserInfoInput
-            inputType='tel'
+            inputType='text'
             inputId='phone'
             labelContent='전화번호'
             userInfo={userInfo}

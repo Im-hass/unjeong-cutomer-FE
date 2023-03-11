@@ -69,7 +69,17 @@ function AppointmentDone() {
               </div>
               <div className={cx('content-li')}>
                 <dt>연락처</dt>
-                <dd>{userInfo ? userInfo.phone : info.phone}</dd>
+                <dd>
+                  {userInfo
+                    ? userInfo.phone.replace(
+                        /^(\d{2,3})(\d{3,4})(\d{4})$/,
+                        `$1-$2-$3`,
+                      )
+                    : info.phone.replace(
+                        /^(\d{2,3})(\d{3,4})(\d{4})$/,
+                        `$1-$2-$3`,
+                      )}
+                </dd>
               </div>
               <div
                 className={cx(

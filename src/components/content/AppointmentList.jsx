@@ -19,6 +19,7 @@ function AppointmentList({ userInfo, appointmentList, setAppointmentList }) {
       setAppointmentList(res.data.data.appointmentList);
     });
   }, [openAlert]);
+  console.log(appointmentList);
 
   return (
     <>
@@ -52,6 +53,7 @@ function AppointmentList({ userInfo, appointmentList, setAppointmentList }) {
           {appointmentList.map(list => (
             <AppointmentItem
               key={list.index}
+              page='list'
               list={list}
               setOpenAlert={setOpenAlert}
               setClickAppointment={setClickAppointment}

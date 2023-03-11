@@ -1,4 +1,5 @@
-import React, { useCallback, useRef } from 'react';
+/* eslint-disable no-nested-ternary */
+import React, { useCallback } from 'react';
 import classNames from 'classnames/bind';
 
 import styles from '../../pages/appointmentForm.module.scss';
@@ -13,16 +14,26 @@ function UserInfoInput({
   appointmentInfo,
   setAppointmentInfo,
 }) {
-  const inputRef = useRef();
+  const userPlaceholder =
+    userInfo && inputId === 'name' ? userInfo?.name : userInfo?.phone;
+  const placeholder =
+    !userInfo && inputId === 'name' ? 'ex) 홍길동' : 'ex) 01012345678';
 
-  const inputChangeHandler = useCallback(() => {
-    const inputValue = inputRef.current.value;
-    if (inputId === 'name')
-      setAppointmentInfo({ ...appointmentInfo, name: inputValue });
-    else if (inputId === 'phone')
-      setAppointmentInfo({ ...appointmentInfo, phone: inputValue });
-    else setAppointmentInfo(inputValue);
-  }, [inputId, appointmentInfo]);
+  const inputChangeHandler = useCallback(
+    e => {
+      const { value } = e.target;
+      if (inputId === 'name')
+        setAppointmentInfo({ ...appointmentInfo, name: value });
+      if (inputId === 'phone') {
+        setAppointmentInfo({
+          ...appointmentInfo,
+          phone: value.replace(/[^0-9]/g, ''),
+        });
+      }
+      if (inputId === 'appointmentNumber') setAppointmentInfo(value);
+    },
+    [inputId, appointmentInfo],
+  );
 
   return (
     <div className={cx('input-wrap')}>
@@ -33,14 +44,17 @@ function UserInfoInput({
         type={inputType}
         id={inputId}
         placeholder={
-          userInfo && inputId === 'name' ? userInfo?.name : userInfo?.phone
+          userInfo
+            ? userPlaceholder
+            : inputId === 'appointmentNumber'
+            ? ''
+            : placeholder
         }
         className={cx('right', 'input')}
-        ref={inputRef}
+        value={appointmentInfo[inputId]}
+        maxLength={inputId === 'phone' ? '11' : ''}
         onChange={inputChangeHandler}
         disabled={userInfo}
-        pattern={inputId === 'phone' ? '^\\d{3}-\\d{3,4}-\\d{4}$' : undefined}
-        title={inputId === 'phone' ? 'ex) 010-1234-5678' : undefined}
         required
       />
     </div>
