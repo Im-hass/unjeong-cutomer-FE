@@ -17,7 +17,7 @@ function ProductInfo() {
   useEffect(() => {
     if (datas === null) {
       getProductInfo().then(res => {
-        setDatas(res.data);
+        setDatas(res.data.data);
       });
     }
   }, []);
