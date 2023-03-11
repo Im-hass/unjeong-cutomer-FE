@@ -12,9 +12,9 @@ function NameConfirmWrap({ userInfo, setUserInfo }) {
         setAppointmentInfo={setUserInfo}
       />
       <UserInfoInput
-        inputType='tel'
+        inputType='text'
         inputId='phone'
-        labelContent='연락처'
+        labelContent='전화번호'
         appointmentInfo={userInfo}
         setAppointmentInfo={setUserInfo}
       />

@@ -39,7 +39,7 @@ function ConfirmAlert({
   const submitHandler = useCallback(() => {
     if (page === 'create') {
       addAppointment(appointmentInfo)
-        .then(() => {
+        .then(res => {
           navigate('/appointmentDone', { state: appointmentInfo });
         })
         .catch(err => {
@@ -62,7 +62,7 @@ function ConfirmAlert({
         changeAppointmentInfo,
       };
       changeAppointment(appointmentCode, changeAppointmentInfo)
-        .then(() => {
+        .then(res => {
           navigate('/appointmentDone', { state: params });
         })
         .catch(err => {
@@ -101,7 +101,15 @@ function ConfirmAlert({
             <div className={cx('content-li')}>
               <dt>연락처</dt>
               <dd>
-                {page === 'create' ? appointmentInfo.phone : userInfo.phone}
+                {page === 'create'
+                  ? appointmentInfo.phone.replace(
+                      /^(\d{2,3})(\d{3,4})(\d{4})$/,
+                      `$1-$2-$3`,
+                    )
+                  : userInfo.phone.replace(
+                      /^(\d{2,3})(\d{3,4})(\d{4})$/,
+                      `$1-$2-$3`,
+                    )}
               </dd>
             </div>
             <div

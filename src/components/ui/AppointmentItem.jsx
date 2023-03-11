@@ -9,6 +9,7 @@ import { CloseArrow, OpenArrow } from '../../assets/svg';
 const cx = classNames.bind(styles);
 
 function AppointmentItem({
+  page,
   list,
   setOpenAlert,
   setClickAppointment,
@@ -43,6 +44,18 @@ function AppointmentItem({
       {isOpen && (
         <div className={cx('more')}>
           <ul>
+            {page === 'view' && (
+              <>
+                <li>
+                  <span>이름</span>
+                  <span>{list.name}</span>
+                </li>
+                <li>
+                  <span>연락처</span>
+                  <span>{list.phone}</span>
+                </li>
+              </>
+            )}
             <li>
               <span>예약상태</span>
               <span>
@@ -63,28 +76,30 @@ function AppointmentItem({
             </li>
           </ul>
 
-          <div className={cx('btn-wrap')}>
-            <button
-              type='button'
-              onClick={appointmentChangeBtnClickHandler}
-              disabled={
-                list.appointmentState === 'CANCELED' ||
-                list.appointmentState === 'DONE'
-              }
-            >
-              예약변경
-            </button>
-            <button
-              type='button'
-              onClick={appointmentCancelBtnClickHandler}
-              disabled={
-                list.appointmentState === 'CANCELED' ||
-                list.appointmentState === 'DONE'
-              }
-            >
-              예약취소
-            </button>
-          </div>
+          {page === 'list' && (
+            <div className={cx('btn-wrap')}>
+              <button
+                type='button'
+                onClick={appointmentChangeBtnClickHandler}
+                disabled={
+                  list.appointmentState === 'CANCELED' ||
+                  list.appointmentState === 'DONE'
+                }
+              >
+                예약변경
+              </button>
+              <button
+                type='button'
+                onClick={appointmentCancelBtnClickHandler}
+                disabled={
+                  list.appointmentState === 'CANCELED' ||
+                  list.appointmentState === 'DONE'
+                }
+              >
+                예약취소
+              </button>
+            </div>
+          )}
         </div>
       )}
     </li>

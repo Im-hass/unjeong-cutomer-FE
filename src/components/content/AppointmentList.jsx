@@ -52,6 +52,7 @@ function AppointmentList({ userInfo, appointmentList, setAppointmentList }) {
           {appointmentList.map(list => (
             <AppointmentItem
               key={list.index}
+              page='list'
               list={list}
               setOpenAlert={setOpenAlert}
               setClickAppointment={setClickAppointment}
