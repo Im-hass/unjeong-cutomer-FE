@@ -33,6 +33,7 @@ function App() {
           <Route path='appointmentDone' element={<AppointmentDone />} />
           <Route path='appointmentConfirm' element={<AppointmentHistory />}>
             <Route index element={<AppointmentConfirm />} />
+            <Route path=':code' element={<AppointmentConfirm />} />
           </Route>
         </Routes>
       </div>

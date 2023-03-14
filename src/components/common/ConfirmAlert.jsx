@@ -40,7 +40,13 @@ function ConfirmAlert({
     if (page === 'create') {
       addAppointment(appointmentInfo)
         .then(res => {
-          navigate('/appointmentDone', { state: appointmentInfo });
+          const { viewCode } = res.data.data;
+          navigate('/appointmentDone', {
+            state: {
+              appointmentInfo,
+              code: viewCode,
+            },
+          });
         })
         .catch(err => {
           toast.error(err.response.data.errorMessage);
@@ -63,6 +69,7 @@ function ConfirmAlert({
       };
       changeAppointment(appointmentCode, changeAppointmentInfo)
         .then(res => {
+          console.log(res);
           navigate('/appointmentDone', { state: params });
         })
         .catch(err => {

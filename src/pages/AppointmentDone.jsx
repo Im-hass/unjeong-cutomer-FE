@@ -24,9 +24,9 @@ function AppointmentDone() {
       : location.state.appointmentInfo.appointmentType
     : location.state.appointmentType;
 
-  const handleCopyClipBoard = async text => {
+  const handleCopyClipBoard = async url => {
     try {
-      await navigator.clipboard.writeText(text);
+      await navigator.clipboard.writeText(url);
       toast('클립보드로 복사되었습니다!', {
         icon: '📋',
       });
@@ -38,7 +38,9 @@ function AppointmentDone() {
   const handleShare = e => {
     const { alt } = e.target;
     if (alt === '공유하기') {
-      handleCopyClipBoard(window.location.href);
+      handleCopyClipBoard(
+        `https://unjeong-tarot.com/appointmentConfirm/${location.state.code}`,
+      );
     } else if (alt === '카카오톡 공유하기') {
       console.log('카카오톡 공유하기');
     } else if (alt === '페이스북 공유하기') {
