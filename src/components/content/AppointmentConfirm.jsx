@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import toast from 'react-hot-toast';
 
+import { useParams } from 'react-router-dom';
 import styles from '../../pages/appointmentForm.module.scss';
 import {
   getMyAppointmentList,
@@ -18,6 +19,7 @@ import AppointmentNumberConfirmWrap from './AppointmentNumberConfirmWrap';
 const cx = classNames.bind(styles);
 
 function AppointmentConfirm() {
+  const { code } = useParams();
   const [isActive, setIsActive] = useState(false);
   const [userInfo, setUserInfo] = useState({
     name: '',
@@ -48,6 +50,16 @@ function AppointmentConfirm() {
         });
     }
   };
+
+  useEffect(() => {
+    if (code !== undefined) {
+      getViewAppointment(code).then(res => {
+        setClickToggle('appointmentNumber');
+        setGetAppointment(res.data.data);
+        setIsActive(true);
+      });
+    }
+  }, []);
 
   return (
     <div className={cx('wrap')}>
