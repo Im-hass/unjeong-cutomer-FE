@@ -38,7 +38,15 @@ function InfoTxt({
         )}
         <span className={cx('txt')}>{txt}</span>
         {productName === '운영시간' && (
-          <span className={cx('desc')}> * {days[shopclosingDay]} 휴무</span>
+          <span className={cx('desc')}>
+            {' '}
+            *{' '}
+            {shopclosingDay.map(
+              (v, i) =>
+                `${days[v]} ${i === shopclosingDay.length - 1 ? ' ' : ', '}`,
+            )}{' '}
+            휴무
+          </span>
         )}
         {unit && <span className={cx('unit')}>{unit}</span>}
       </div>

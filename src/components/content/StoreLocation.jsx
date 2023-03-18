@@ -42,7 +42,7 @@ function StoreLocation() {
               productInfo={false}
               productName='운영시간'
               txt={`${datas.openingHour}:00 ~ ${datas.closingHour}:00`}
-              shopclosingDay={datas.shopClosingDayOfWeek}
+              shopclosingDay={datas.storeClosingDayOfWeekList}
             />
 
             <InfoTxt
