@@ -44,10 +44,12 @@ function AppointmentConfirm() {
       }
     } else if (clickToggle === 'appointmentNumber') {
       if (userAppointmentNumber !== '')
-        getViewAppointment(userAppointmentNumber).then(res => {
-          setGetAppointment(res.data.data);
-          setIsActive(true);
-        });
+        getViewAppointment(userAppointmentNumber)
+          .then(res => {
+            setGetAppointment(res.data.data);
+            setIsActive(true);
+          })
+          .catch(err => toast.error(err.response.data.errorMessage));
     }
   };
 
