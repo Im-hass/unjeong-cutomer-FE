@@ -39,7 +39,7 @@ function AppointmentItem({
       <div className={cx('title', state)} onClick={handleOpen}>
         <span>{list.appointmentDate}</span>
         <span>{list.appointmentHour}:00</span>
-        {isOpen ? <OpenArrow /> : <CloseArrow />}
+        {isOpen ? <CloseArrow /> : <OpenArrow />}
       </div>
       {isOpen && (
         <div className={cx('more')}>
