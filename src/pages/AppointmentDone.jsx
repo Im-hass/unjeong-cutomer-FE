@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import classNames from 'classnames/bind';
-import toast from 'react-hot-toast';
 
 import styles from './appointmentDone.module.scss';
 import Pagination from '../components/common/Pagination';
@@ -25,11 +24,14 @@ function AppointmentDone() {
     : location.state.appointmentType;
 
   const handleCopyClipBoard = async url => {
+    const shareData = {
+      title: '운정사주타로 예약',
+      text: '운정사주타로 예약 조회입니다.',
+      url,
+    };
+
     try {
-      await navigator.clipboard.writeText(url);
-      toast('클립보드로 복사되었습니다!', {
-        icon: '📋',
-      });
+      await navigator.share(shareData);
     } catch (e) {
       console.log(e);
     }
