@@ -68,8 +68,7 @@ function ConfirmAlert({
         changeAppointmentInfo,
       };
       changeAppointment(appointmentCode, changeAppointmentInfo)
-        .then(res => {
-          console.log(res);
+        .then(() => {
           navigate('/appointmentDone', { state: params });
         })
         .catch(err => {

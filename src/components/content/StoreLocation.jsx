@@ -15,7 +15,6 @@ function StoreLocation() {
   useEffect(() => {
     if (datas === null) {
       getStoreInfo().then(res => {
-        console.log(res.data.data);
         setDatas(res.data.data);
       });
     }

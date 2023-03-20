@@ -39,7 +39,7 @@ function AppointmentForm() {
     },
     {
       index: 1,
-      key: '개인정보 처리방침 읽음 여부',
+      key: '개인정보 처리방침',
     },
   ]);
   const [selectPolicy, setSelectPolicy] = useState();
@@ -120,7 +120,6 @@ function AppointmentForm() {
   );
 
   const handleDetailPolicy = labelContent => {
-    console.log(labelContent);
     setOpenPolicy(true);
     setSelectPolicy(labelContent);
   };
