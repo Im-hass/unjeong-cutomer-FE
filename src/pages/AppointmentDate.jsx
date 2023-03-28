@@ -7,6 +7,7 @@ import classNames from 'classnames/bind';
 import styles from './appointmentDate.module.scss';
 import useTransformDate from '../hooks/useTransformDate';
 import { getAvailableAppointmentTime } from '../store/api/appointment';
+import { getStoreHolidayInfo } from '../store/api/storeInfo';
 import { Pagination, Title } from '../components/common/index';
 import { DateBtn, TimeBtn, CheckInput, Button } from '../components/ui/index';
 import { AppointmentIcon, TimeIcon } from '../assets/svg';
@@ -36,7 +37,6 @@ function AppointmentDate() {
 
     setIsLoading(true);
     setSevenDayArr(transformDateArr);
-
     let params;
 
     if (clickDateBtn) {
